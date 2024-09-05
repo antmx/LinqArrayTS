@@ -15,7 +15,7 @@ describe("aggregate", () => {
 
 	test("returns correct result", () => {
 
-		let items = new LinqArray<number>(_items);
+		let items = new LinqArray(_items); // items is LinqArray<number>
 
 		let aggregateResult = items.aggregate(
 			(result, current:number):number => {
@@ -24,14 +24,13 @@ describe("aggregate", () => {
 				else
 					return result;
 			});
-		//let aggregateResult: number = 99;
 
 		let expected: number = 2 + 4 + 6 + 8;
 
 		console.info("aggregateResult = " + aggregateResult);
 		console.info("expected = " + expected);
+		
 		expect(aggregateResult).toEqual(expected);
-		//expect(aggregateResult).toBe(expected);
 	});
 
 });
