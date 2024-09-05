@@ -1,30 +1,30 @@
-import {describe, expect, test} from '@jest/globals';
-import LinqArray from '../src/LinqArray';
+import { describe, expect, test } from "@jest/globals";
+import LinqArray from "../src/LinqArray";
 
 /**
- * @type {number[]}
+ * Array of numbers
  */
 let _items: number[];
 
 beforeEach(function () {
-
-	_items = ([1, 2, 3, 4, 5, 6, 7, 8]);
+	_items = [1, 2, 3, 4, 5, 6, 7, 8];
 });
 
-describe("aggregate", () => { 
+describe("aggregate", () => {
 
 	test("returns correct result", () => {
 
-		let items = new LinqArray(_items); // items is LinqArray<number>
+		let items = new LinqArray(_items); // items is of type LinqArray<number>
 
-		let aggregateResult = items.aggregate(
-			(result, current) => {
-				if (current % 2 === 0)
-					return result + current;
-				else
-					return result;
-			}); // aggregateResult is number
-
+		let aggregateResult = items.aggregate((result, current) => {
+			if (current % 2 === 0) {
+				return result + current;
+			}
+			else {
+				return result;
+			}
+		}); // aggregateResult is of type number
+		
 		let expected: number = 2 + 4 + 6 + 8;
 
 		console.info("aggregateResult = " + aggregateResult);
@@ -32,13 +32,12 @@ describe("aggregate", () => {
 
 		expect(aggregateResult).toEqual(expected);
 	});
-
 });
 
 // test("Combines the result of applying the predicate function to each item", function () {
 
 // 	let items = new LinqArray<number>(_items);
-	
+
 // 	let aggregateResult = items.aggregate(
 // 		function (result, current) {
 // 			if (current % 2 === 0)
