@@ -43,6 +43,29 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
+     * Determines whether all elements of a sequence satisfy a condition.
+     * @param func A function to test each element for a condition.
+     */
+    all(func: (current: TItem, indexInArray: number) => boolean) {
+
+        if (func == null) {
+            throw new Error("ArgumentNull 'func'");
+        }
+
+        var item: TItem;
+
+        for (var idx = 0; idx < this.length; idx += 1) {
+            item = this[idx];
+
+            if (!func(item, idx)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Determines whether a sequence contains any elements, or whether any element satisfies a condition.
      * @param func An optional function to test each element for a condition.
      * @returns true if the source sequence is not empty and at least one of its elements passes the test in the specified predicate (if specified); otherwise, false
