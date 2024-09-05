@@ -1,4 +1,4 @@
-# LinqArray&lt;T&gt;
+# TypeScript LinqArray&lt;T&gt;
 ## A TypeScript array that supports .NET Language Integrated Query (LINQ) operations
 
 TypeScript code example
