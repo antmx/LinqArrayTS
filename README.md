@@ -1,7 +1,7 @@
 # LinqArray&lt;T&gt;
 ## An array that supports Language Integrated Query (LINQ) operations in JavaScript - written in TypeScript
 
-Code example
+TypeScript code example
 ```typescript
 import LinqArray from '../src/LinqArray';
 
