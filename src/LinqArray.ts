@@ -47,12 +47,12 @@ export default class LinqArray<TItem> extends Array<TItem> {
      * @param func A function to test each element for a condition.
      * @returns A new LinqArray that contains elements from the input sequence that satisfy the condition.
      */
-    where(func: (val: TItem) => boolean): LinqArray<TItem> {
+    where(func: (val: TItem, indexInArray: number) => boolean): LinqArray<TItem> {
 
         let result = new LinqArray<TItem>();
 
         this.forEach((valueOfElement, indexInArray) => {
-            if (func(valueOfElement)) {
+            if (func(valueOfElement, indexInArray)) {
                 result.push(valueOfElement);
             }
         });

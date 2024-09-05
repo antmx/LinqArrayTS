@@ -18,7 +18,7 @@ let firstOver4times10 = items
 // firstOver4times10 === 50 and is of type number
 ```
 
-LinqArray includes equivalents of these common .NET Linq, Generic and Array methods:
+LinqArray includes equivalents of these common .NET LINQ, Generic and Array methods:
 - [aggregate](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.aggregate)
 - [all](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.all)
 - [any](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.any)
