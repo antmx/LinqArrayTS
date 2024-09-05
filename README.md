@@ -3,8 +3,7 @@
 
 Code example
 ```js
-/// <reference path="./linqify.js" />
-// linqify.js automatically adds .linqify() and .deLinqify() methods to arrays
+import LinqArray from '../src/LinqArray';
 
 let jsItems = ([1, 2, 3, 4, 5, 6, 7, 8]); // Standard JavaScript array of numbers
 let items = new LinqArray<number>(jsItems); // LinqArray<number> constructed from sandard JavaScript array
