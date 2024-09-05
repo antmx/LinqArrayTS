@@ -43,21 +43,27 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
-     * Filters a sequence of values based on a predicate.
-     * @param func A function to test each element for a condition.
-     * @returns A new LinqArray that contains elements from the input sequence that satisfy the condition.
+     * Determines whether a sequence contains any elements, or whether any element satisfies a condition.
+     * @param func An optional function to test each element for a condition.
+     * @returns true if the source sequence is not empty and at least one of its elements passes the test in the specified predicate (if specified); otherwise, false
      */
-    where(func: (val: TItem, indexInArray: number) => boolean): LinqArray<TItem> {
+    any(func?: (current: TItem, indexInArray: number) => boolean) {
 
-        let result = new LinqArray<TItem>();
+        if (func === undefined) {
+            return this.length > 0;
+        }
 
-        this.forEach((valueOfElement, indexInArray) => {
-            if (func(valueOfElement, indexInArray)) {
-                result.push(valueOfElement);
+        let item: TItem = null!;
+
+        for (var idx = 0; idx < this.length; idx++) {
+            item = this[idx];
+
+            if (func(item, idx)) {
+                return true;
             }
-        });
+        }
 
-        return result;
+        return false;
     }
 
     /**
@@ -97,4 +103,24 @@ export default class LinqArray<TItem> extends Array<TItem> {
 
         return result!; // Non-null Assertion        
     }
+
+    /**
+     * Filters a sequence of values based on a predicate.
+     * @param func A function to test each element for a condition.
+     * @returns A new LinqArray that contains elements from the input sequence that satisfy the condition.
+     */
+    where(
+        func: (valueOfElement: TItem, indexInArray: number) => boolean): LinqArray<TItem> {
+
+        let result = new LinqArray<TItem>();
+
+        this.forEach((valueOfElement, indexInArray) => {
+            if (func(valueOfElement, indexInArray)) {
+                result.push(valueOfElement);
+            }
+        });
+
+        return result;
+    }
+
 }
