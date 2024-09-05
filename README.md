@@ -1,5 +1,5 @@
 # LinqArray&lt;T&gt;
-## An array that supports Language Integrated Query (LINQ) operations in JavaScript - written in TypeScript
+## A TypeScript array that supports .NET Language Integrated Query (LINQ) operations
 
 TypeScript code example
 ```typescript
