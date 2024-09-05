@@ -1,12 +1,13 @@
 # TypeScript LinqArray&lt;T&gt;
-## A TypeScript array that supports .NET Language Integrated Query (LINQ) operations
+## A TypeScript generic array that supports .NET Language Integrated Query (LINQ) operations
 
 TypeScript code example
 ```typescript
 import LinqArray from '../src/LinqArray';
 
 let jsItems = ([1, 2, 3, 4, 5, 6, 7, 8]); // Standard JavaScript array of numbers
-let items = new LinqArray<number>(jsItems); // LinqArray<number> constructed from sandard JavaScript array
+let items = new LinqArray<number>(jsItems); // items is of type LinqArray<number>, constructed from sandard JavaScript array
+let items2 = new LinqArray(jsItems); // Simplified constructor syntax still resulting in type LinqArray<number>
 
 let firstOver4times10 = items
     .where((i) => i > 4)
@@ -14,7 +15,7 @@ let firstOver4times10 = items
     .orderBy((i) => i)
     .first();
 
-// firstOver4times10 === 50 and of type number
+// firstOver4times10 === 50 and is of type number
 ```
 
 LinqArray includes equivalents of these common .NET Linq, Generic and Array methods:
