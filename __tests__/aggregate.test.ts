@@ -18,7 +18,7 @@ describe("aggregate", () => {
 		let items = new LinqArray(_items); // items is LinqArray<number>
 
 		let aggregateResult = items.aggregate(
-			(result, current:number):number => {
+			(result, current) => {
 				if (current % 2 === 0)
 					return result + current;
 				else
