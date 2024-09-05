@@ -22,35 +22,35 @@ LinqArray includes equivalents of these common .NET LINQ, Generic and Array meth
 - [aggregate](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.aggregate)
 - [all](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.all)
 - [any](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.any)
-- [average](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.average)
-- [concat](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.concat)
-- [contains](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.contains)
-- [count](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.count)
-- [distinct](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.distinct)
-- [elementAt](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.elementAt)
-- [except](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.except)
-- [first](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.first)
-- [firstOrDefault](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.firstOrDefault)
+- [average](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.average) TODO
+- [concat](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.concat) TODO
+- [contains](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.contains) TODO
+- [count](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.count) TODO
+- [distinct](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.distinct) TODO
+- [elementAt](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.elementAt) TODO
+- [except](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.except) TODO
+- [first](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.first) TODO
+- [firstOrDefault](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.firstOrDefault) TODO
 - [forEach](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.foreach)
-- [groupBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.groupBy)
-- [intersect](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.intersect)
-- [last](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.last)
-- [max](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.max)
-- [min](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.min)
-- [orderBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderBy)
-- [orderByDescending](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderByDescending)
-- [reverse](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.reverse)
-- [select](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.select)
-- [selectMany](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.selectMany)
-- [setValue](https://learn.microsoft.com/en-us/dotnet/api/system.array.setvalue)
-- [single](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.single)
-- [singleOrDefault](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.singleOrDefault)
-- [skip](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skip)
-- [skipWhile](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skipWhile)
-- [sum](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.sum)
-- [take](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.take)
-- [takeWhile](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.takeWhile)
-- [union](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.union)
+- [groupBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.groupBy) TODO
+- [intersect](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.intersect) TODO
+- [last](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.last) TODO
+- [max](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.max) TODO
+- [min](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.min) TODO
+- [orderBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderBy) TODO
+- [orderByDescending](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderByDescending) TODO
+- [reverse](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.reverse) TODO
+- [select](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.select) TODO
+- [selectMany](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.selectMany) TODO
+- [setValue](https://learn.microsoft.com/en-us/dotnet/api/system.array.setvalue) TODO
+- [single](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.single) TODO
+- [singleOrDefault](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.singleOrDefault) TODO
+- [skip](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skip) TODO
+- [skipWhile](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skipWhile) TODO
+- [sum](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.sum) TODO
+- [take](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.take) TODO
+- [takeWhile](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.takeWhile) TODO
+- [union](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.union) TODO
 - [where](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.where)
-- [zip](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.zip)
+- [zip](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.zip) TODO
 
