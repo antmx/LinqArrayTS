@@ -12,7 +12,7 @@ beforeEach(function () {
 
 describe("aggregate", () => {
 
-	test("returns correct result", () => {
+	test("Combines the result of applying a number accumulator function to each item", () => {
 
 		let items = new LinqArray(_items); // items is of type LinqArray<number>
 
@@ -24,89 +24,64 @@ describe("aggregate", () => {
 				return result;
 			}
 		}); // aggregateResult is of type number
-		
-		let expected: number = 2 + 4 + 6 + 8;
 
-		console.info("aggregateResult = " + aggregateResult);
-		console.info("expected = " + expected);
+		let expected = 2 + 4 + 6 + 8;
+
+		expect(aggregateResult).toEqual(expected);
+	});
+
+	test("Combines the result of applying a string accumulator function to each item", () => {
+
+		let chars = new LinqArray(["a", "b", "c", "d"]);
+
+		let aggregateResult = chars.aggregate(
+			(result, current) => {
+				return result !== null ? result + ',' + current : current;
+			});
+
+		let expected = "a,b,c,d";
+
+		expect(expected).toEqual(aggregateResult);
+	});
+
+	test("Combines the result of applying an accumulator function to each item with an an initial seed value", () => {
+
+		let items = new LinqArray(_items); // items is of type LinqArray<number>
+
+		let aggregateResult = items.aggregate((result, current) => {
+			if (current % 2 === 0) {
+				return result + current;
+			}
+			else {
+				return result;
+			}
+		}, 10); // aggregateResult is of type number
+
+		let expected = 2 + 4 + 6 + 8 + 10;
+
+		expect(aggregateResult).toEqual(expected);
+	});
+
+	test("Combines the result of applying an accumulator function to each item with an an initial seed value then applying a result selector", () => {
+
+		let items = new LinqArray(_items); // items is of type LinqArray<number>
+
+		let aggregateResult = items.aggregate(
+			(result, current) => {
+				if (current % 2 === 0) {
+					return result + current;
+				}
+				else {
+					return result;
+				}
+			},
+			10,
+			(result) => {
+				return result * 20
+			}); // aggregateResult is of type number
+
+		let expected = (2 + 4 + 6 + 8 + 10) * 20;
 
 		expect(aggregateResult).toEqual(expected);
 	});
 });
-
-// test("Combines the result of applying the predicate function to each item", function () {
-
-// 	let items = new LinqArray<number>(_items);
-
-// 	let aggregateResult = items.aggregate(
-// 		function (result, current) {
-// 			if (current % 2 === 0)
-// 				return result + current;
-// 			else
-// 				return result;
-// 		});
-
-// 	let expected = 2 + 4 + 6 + 8;
-
-// 	//expect(expected).toEqual(aggregateResult);
-// 	console.info("aggregateResult = " + aggregateResult);
-// 	console.info("expected = " + expected);
-// 	expect(aggregateResult).toEqual(expected);
-// });
-
-/*
-test("Combines the result of applying the predicate function to each item", function () {
-
-	let chars = new LinqArray<string>(["a", "b", "c", "d"]);
-
-	let aggregateResult = chars.aggregate(
-		function (result, current) {
-			return result !== null ? result + ',' + current : current;
-		});
-
-	let expected = "a,b,c,d";
-
-	expect(expected).toEqual(aggregateResult);
-});
-
-test("Combines the result of applying the predicate function to each item", function () {
-
-	const seed: number = 10;
-
-	let items = new LinqArray<number>(_items);
-
-	let aggregateResult = items.aggregate(
-		function (result, current) {
-			if (current % 2 == 0)
-				return result + current;
-			else
-				return result;
-		},
-		seed);
-
-	let expected = 2 + 4 + 6 + 8 + seed;
-
-	expect(expected).toEqual(aggregateResult);
-});
-
-test("Combines the result of applying the predicate function to each item then applying result selector", function () {
-
-	const seed = 10;
-
-	let aggregateResult = _items.aggregate(
-		function (result, current) {
-			if (current % 2 == 0)
-				return result + current;
-			else
-				return result;
-		},
-		seed,
-		function (result) {
-			return result / 2;
-		});
-
-	let expected = (2 + 4 + 6 + 8 + seed) / 2;
-
-	expect(expected).toEqual(aggregateResult);
-});
-*/
