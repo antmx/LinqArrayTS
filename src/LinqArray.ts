@@ -91,7 +91,6 @@ export default class LinqArray<TItem> extends Array<TItem> {
      * @param func An accumulator function to be invoked on each element.
      * @returns 
      */
-    //aggregate(func: (result?: TItem, current?: TItem) => TItem): TItem {
     aggregate(func: (result: TItem, current: TItem) => TItem): TItem {
 
         if (this.length == 0) {
@@ -102,12 +101,10 @@ export default class LinqArray<TItem> extends Array<TItem> {
             throw new Error("ArgumentNull 'func'");
         }
 
-        let result: TItem = null!; // = undefined;
+        let result: TItem = null!;
         
         this.forEach((valueOfElement, indexInArray) => {
-            if (indexInArray > 0) {
-                result = func(result, valueOfElement);
-            }
+            result = func(result, valueOfElement);
         });
 
         return result!; // Non-null Assertion

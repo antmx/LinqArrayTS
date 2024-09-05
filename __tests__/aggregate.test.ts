@@ -1,4 +1,4 @@
-import { describe, expect, test } from '@jest/globals';
+import {describe, expect, test} from '@jest/globals';
 import LinqArray from '../src/LinqArray';
 
 /**
@@ -15,8 +15,6 @@ describe("aggregate", () => {
 
 	test("returns correct result", () => {
 
-		debugger;
-		let foo: number = 1;
 		let items = new LinqArray<number>(_items);
 
 		let aggregateResult = items.aggregate(
