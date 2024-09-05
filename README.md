@@ -2,7 +2,7 @@
 ## An array that supports Language Integrated Query (LINQ) operations in JavaScript - written in TypeScript
 
 Code example
-```js
+```typescript
 import LinqArray from '../src/LinqArray';
 
 let jsItems = ([1, 2, 3, 4, 5, 6, 7, 8]); // Standard JavaScript array of numbers
@@ -14,7 +14,7 @@ let firstOver4times10 = items
     .orderBy((i) => i)
     .first();
 
-// firstOver4times10 === 50
+// firstOver4times10 === 50 and of type number
 ```
 
 LinqArray includes equivalents of these common .NET Linq, Generic and Array methods:

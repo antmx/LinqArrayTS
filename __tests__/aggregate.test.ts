@@ -23,13 +23,13 @@ describe("aggregate", () => {
 					return result + current;
 				else
 					return result;
-			});
+			}); // aggregateResult is number
 
 		let expected: number = 2 + 4 + 6 + 8;
 
 		console.info("aggregateResult = " + aggregateResult);
 		console.info("expected = " + expected);
-		
+
 		expect(aggregateResult).toEqual(expected);
 	});
 
