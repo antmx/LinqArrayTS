@@ -175,7 +175,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
     /**
      * Determines whether a sequence contains a specified element by using either the default equality comparer, or an optional specified comparer.
      * @param value The value to locate in the sequence.
-     * @param comparerFunc An equality comparer to compare values.
+     * @param comparerFunc An optional equality comparer to compare values.
      * @returns `true` if the source sequence contains an element that has the specified value; otherwise, `false`.
      */
     contains(
@@ -207,6 +207,28 @@ export default class LinqArray<TItem> extends Array<TItem> {
     count(): number {
 
         return this.length;
+    };
+
+    /**
+     * Returns distinct elements from a sequence by using the default equality comparer to compare values, or an optional custom comparer.
+     * @param comparerFunc An optional equality comparer function to compare values.
+     * @returns A new LinqArray<TItem> that contains distinct elements from the source sequence.
+     */
+    distinct(
+        comparerFunc?: (first: TItem, second: TItem) => boolean
+    ): LinqArray<TItem> {
+
+        var self = this;
+        var results = new LinqArray<TItem>();
+
+        self.forEach((valueOfElement, indexInArray) => {
+
+            if (!results.contains(valueOfElement, comparerFunc)) {
+                results.push(valueOfElement);
+            }
+        });
+
+        return results;
     };
 
     /**
