@@ -232,6 +232,20 @@ export default class LinqArray<TItem> extends Array<TItem> {
     };
 
     /**
+     * Returns the element at a specified index in a sequence.
+     * @param index The index of the element to retrieve, which is either from the beginning or the end of the sequence.
+     * @returns The element at the specified position in the source sequence.
+     */
+    elementAt(index: number): TItem {
+        
+        if (this.length > index) {
+            return this[index];
+        }
+
+        return null!;
+    };
+
+    /**
      * Projects each element of a sequence into a new form, optionally incorporating the element's index.
      * @param transformFunc A transform function to apply to each source element; the second parameter of the function represents the index of the source element.
      * @returns 
