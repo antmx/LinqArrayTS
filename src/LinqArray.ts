@@ -153,6 +153,26 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
+     * Concatenates a second sequence to the current sequence.
+     * @param secondItems The sequence to concatenate to the current sequence.
+     * @returns An LinqArray<TItem> that contains the concatenated elements of the current sequence and the second sequence.
+     */
+    concat(
+        secondItems: LinqArray<TItem>
+    ): LinqArray<TItem> {
+
+        if (secondItems == null) {
+            throw new Error("ArgumentNull 'secondItems'");
+        }
+
+        let results = new LinqArray<TItem>(this);
+
+        results.push.apply(results, secondItems);
+
+        return results;
+    }
+
+    /**
      * Projects each element of a sequence into a new form, optionally incorporating the element's index.
      * @param transformFunc A transform function to apply to each source element; the second parameter of the function represents the index of the source element.
      * @returns 
