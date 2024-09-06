@@ -128,6 +128,52 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
+     * Computes the average of a sequence of numeric values.
+     * @param selectorFunc An optional transform function to apply to each element. 
+     * @returns 
+     */
+    average(
+        selectorFunc?: (result: TItem) => number
+    ): number {
+
+        let total: number = null!;
+
+        this.forEach((valueOfElement: any) => {
+
+            if (selectorFunc !== undefined) {
+                valueOfElement = selectorFunc(valueOfElement);
+            }
+
+            total += Number(valueOfElement);
+        });
+
+        let avg = total / this.length;
+
+        return avg;
+    }
+
+    /**
+     * Projects each element of a sequence into a new form, optionally incorporating the element's index.
+     * @param transformFunc A transform function to apply to each source element; the second parameter of the function represents the index of the source element.
+     * @returns 
+     */
+    select<TResultItem>(
+        transformFunc: (valueOfElement: TItem, indexInArray: number) => TResultItem
+    ): LinqArray<TResultItem> {
+
+        let results = new LinqArray<TResultItem>();
+        let resultItem: TResultItem = null!;
+
+        this.forEach((valueOfElement, indexInArray) => {
+
+            resultItem = transformFunc(valueOfElement, indexInArray);
+            results.push(resultItem);
+        });
+
+        return results;
+    }
+
+    /**
      * Filters a sequence of values based on a predicate.
      * @param func A function to test each element for a condition.
      * @returns A new LinqArray that contains elements from the input sequence that satisfy the condition.
