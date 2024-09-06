@@ -5,17 +5,21 @@ TypeScript code example
 ```typescript
 import LinqArray from '../src/LinqArray';
 
-let jsItems = ([1, 2, 3, 4, 5, 6, 7, 8]); // Standard JS array of numbers
+let jsItems = [1, 2, 3, 4, 5, 6, 7, 8]; // Standard JS array of numbers
 let items = new LinqArray<number>(jsItems); // items is of type LinqArray<number>, constructed from the standard JS array of numbers
 let items2 = new LinqArray(jsItems); // Alternative simplified constructor syntax still resulting in type LinqArray<number>, as the generic type is inferred from the type of the standard JS array items (number)
 
-let firstOver4times10 = items
-    .where((i) => i > 4)
-    .select((i) => i * 10)
-    .orderBy((i) => i)
-    .first();
+let firstOver4Times10 = items
+    .where(i => i > 4)      // items > 4
+    .select(i => i * 10)    // mutiply by 10
+    .orderBy(i => i)        // order ascending
+    .first();               // first item
 
 // firstOver4times10 === 50 and is of type number
+
+let expected = 50;
+
+expect(firstOver4Times10).toEqual(expected);
 ```
 
 LinqArray includes equivalents of these common .NET LINQ, Generic and Array methods:
