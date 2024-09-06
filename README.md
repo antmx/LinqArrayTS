@@ -22,8 +22,8 @@ LinqArray includes equivalents of these common .NET LINQ, Generic and Array meth
 - [aggregate](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.aggregate)
 - [all](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.all)
 - [any](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.any)
-- [average](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.average) TODO
-- [concat](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.concat) TODO
+- [average](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.average)
+- [concat](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.concat)
 - [contains](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.contains) TODO
 - [count](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.count) TODO
 - [distinct](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.distinct) TODO
@@ -40,7 +40,7 @@ LinqArray includes equivalents of these common .NET LINQ, Generic and Array meth
 - [orderBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderBy) TODO
 - [orderByDescending](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderByDescending) TODO
 - [reverse](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.reverse) TODO
-- [select](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.select) TODO
+- [select](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.select)
 - [selectMany](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.selectMany) TODO
 - [setValue](https://learn.microsoft.com/en-us/dotnet/api/system.array.setvalue) TODO
 - [single](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.single) TODO
