@@ -4,29 +4,46 @@ import LinqArray from "../src/LinqArray";
 
 describe('contains', () => {
 
-    let _firstItems: LinqArray<number>;
-    let _secondItems: LinqArray<number>;
+    let _items;
 
     beforeEach(function () {
 
-        _firstItems = new LinqArray([1, 2, 3]);
-        _secondItems = new LinqArray([4, 5, 6]);
+        _items = [1, 2, 3];
     });
 
-    test("Combines 2 lists into 1", function () {
+    test("Returns true when list does contain value", () => {
 
-        let items = new LinqArray(_firstItems); // items is of type LinqArray<number>
+        let items = new LinqArray(_items); // items is of type LinqArray<number>
 
-        let result = items.concat(_secondItems);
+        let result = items.contains(2);
 
-        let expected = [1, 2, 3, 4, 5, 6];
+        expect(result).toEqual(true);
+    });
 
-        expect(result.length).toEqual(6);
+    test("Returns true when list does contain value that matches the specified comparer", () => {
 
-        result.forEach((valueOfElement, indexInArray) => {
+        let users: { name: string, age: number }[] = [
+            { "name": "Rod", "age": 20 },
+            { "name": "Jane", "age": 40 },
+            { "name": "Freddie", "age": 60 }
+        ];
 
-            expect(valueOfElement).toEqual(expected[indexInArray]);
-        });
+        let items = new LinqArray(users); // items is of type LinqArray<number>
+
+        let result = items.contains(
+            { "name": "rod", "age": 10 },
+            (first, second) => first.name.toLowerCase() === second.name.toLowerCase());
+
+        expect(result).toEqual(true);
+    });
+
+    test("Returns false when list does not contain value", () => {
+
+        let items = new LinqArray(_items); // items is of type LinqArray<number>
+
+        let result = items.contains(4);
+
+        expect(result).toEqual(false);
     });
 
 });

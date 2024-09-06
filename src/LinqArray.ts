@@ -173,6 +173,34 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
+     * Determines whether a sequence contains a specified element by using either the default equality comparer, or an optional specified comparer.
+     * @param value The value to locate in the sequence.
+     * @param comparerFunc An equality comparer to compare values.
+     * @returns `true` if the source sequence contains an element that has the specified value; otherwise, `false`.
+     */
+    contains(
+        value: TItem,
+        comparerFunc?: (first: TItem, second: TItem) => boolean
+    ): boolean {
+
+        if (comparerFunc === undefined) {
+            comparerFunc = (first: TItem, second: TItem) => first == second;
+        }
+
+        let result = false;
+
+        this.forEach(function (valueOfElement, indexInArray) {
+
+            if (comparerFunc(valueOfElement, value)) {
+                result = true;
+                return false; // break out of forEach
+            }
+        });
+
+        return result;
+    };
+
+    /**
      * Projects each element of a sequence into a new form, optionally incorporating the element's index.
      * @param transformFunc A transform function to apply to each source element; the second parameter of the function represents the index of the source element.
      * @returns 
