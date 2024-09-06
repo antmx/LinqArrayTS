@@ -201,6 +201,15 @@ export default class LinqArray<TItem> extends Array<TItem> {
     };
 
     /**
+     * Returns the number of elements in a sequence.
+     * @returns The number of elements in the sequence.
+     */
+    count(): number {
+
+        return this.length;
+    };
+
+    /**
      * Projects each element of a sequence into a new form, optionally incorporating the element's index.
      * @param transformFunc A transform function to apply to each source element; the second parameter of the function represents the index of the source element.
      * @returns 

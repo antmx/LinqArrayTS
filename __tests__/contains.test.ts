@@ -28,7 +28,7 @@ describe('contains', () => {
             { "name": "Freddie", "age": 60 }
         ];
 
-        let items = new LinqArray(users); // items is of type LinqArray<number>
+        let items = new LinqArray(users); // items is of type LinqArray<{ name: string, age: number }>
 
         let result = items.contains(
             { "name": "rod", "age": 10 },
