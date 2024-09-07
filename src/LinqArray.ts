@@ -237,7 +237,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
      * @returns The element at the specified position in the source sequence.
      */
     elementAt(index: number): TItem {
-        
+
         if (this.length > index) {
             return this[index];
         }
@@ -245,6 +245,39 @@ export default class LinqArray<TItem> extends Array<TItem> {
         return null!;
     };
 
+    /**
+     * Produces the set difference of two sequences by using either the default equality comparer, or an optional custom equality comparer, to compare values.
+     * @param secondItems A LinqArray<TItem> whose elements that also occur in the current sequence will cause those elements to be removed from the returned sequence.
+     * @param comparerFunc An optional custom equality comparer to compare values.
+     * @returns A sequence that contains the set difference of the elements of two sequences.
+     */
+    except(
+        secondItems: LinqArray<TItem>,
+        comparerFunc?: (first: TItem, second: TItem) => boolean
+    ): LinqArray<TItem> {
+
+        let results = new LinqArray<TItem>();
+
+        let firstItems = this.distinct(comparerFunc);
+        secondItems = secondItems.distinct(comparerFunc);
+
+        firstItems.forEach((valueOfElement, indexInArray) => {
+
+            if (!secondItems.contains(valueOfElement, comparerFunc)) {
+                results.push(valueOfElement);
+            }
+        });
+
+        secondItems.forEach((valueOfElement, indexInArray) => {
+
+            if (!this.contains(valueOfElement, comparerFunc)) {
+                results.push(valueOfElement);
+            }
+        });
+
+        return results;
+    };
+    
     /**
      * Projects each element of a sequence into a new form, optionally incorporating the element's index.
      * @param transformFunc A transform function to apply to each source element; the second parameter of the function represents the index of the source element.
