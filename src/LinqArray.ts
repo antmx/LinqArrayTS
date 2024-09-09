@@ -52,7 +52,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
      */
     all(
         func: (current: TItem, indexInArray: number) => boolean
-    ) {
+    ): boolean {
 
         if (func === undefined) {
             throw new Error("ArgumentNull 'func'");
@@ -78,7 +78,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
      */
     any(
         func?: (current: TItem, indexInArray: number) => boolean
-    ) {
+    ): boolean {
 
         if (func === undefined) {
             return this.length > 0;
@@ -403,7 +403,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         comparerFunc?: (first: TItem, second: TItem) => boolean
     ): LinqArray<TItem> {
 
-        var results = new LinqArray<TItem>();
+        let results = new LinqArray<TItem>();
 
         this.distinct(comparerFunc).forEach(function (valueOfElement, indexInArray) {
 
