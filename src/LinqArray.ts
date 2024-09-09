@@ -50,13 +50,13 @@ export default class LinqArray<TItem> extends Array<TItem> {
      */
     all(func: (current: TItem, indexInArray: number) => boolean) {
 
-        if (func == null) {
+        if (func === undefined) {
             throw new Error("ArgumentNull 'func'");
         }
 
-        var item: TItem;
+        let item: TItem;
 
-        for (var idx = 0; idx < this.length; idx += 1) {
+        for (let idx = 0; idx < this.length; idx += 1) {
             item = this[idx];
 
             if (!func(item, idx)) {
@@ -80,7 +80,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
 
         let item: TItem = null!;
 
-        for (var idx = 0; idx < this.length; idx++) {
+        for (let idx = 0; idx < this.length; idx++) {
             item = this[idx];
 
             if (func(item, idx)) {
@@ -108,7 +108,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
             throw new Error("NoElements");
         }
 
-        if (func == null) {
+        if (func === undefined) {
             throw new Error("ArgumentNull 'func'");
         }
 
@@ -220,8 +220,8 @@ export default class LinqArray<TItem> extends Array<TItem> {
         comparerFunc?: (first: TItem, second: TItem) => boolean
     ): LinqArray<TItem> {
 
-        var self = this;
-        var results = new LinqArray<TItem>();
+        let self = this;
+        let results = new LinqArray<TItem>();
 
         self.forEach((valueOfElement, indexInArray) => {
 
@@ -297,9 +297,8 @@ export default class LinqArray<TItem> extends Array<TItem> {
         }
 
         let item: TItem;
-        let idx: number;
 
-        for (idx = 0; idx < this.length; idx++) {
+        for (let idx = 0; idx < this.length; idx++) {
             item = this[idx];
 
             if (predicateFunc(item)) {
@@ -310,6 +309,12 @@ export default class LinqArray<TItem> extends Array<TItem> {
         throw new Error("NoElements");
     };
 
+    /**
+     * Returns the first element of a sequence, or a default value if no element is found.
+     * @param defaultValue The default value to return if the sequence is empty.
+     * @param predicateFunc An optional function to test each element for a condition.
+     * @returns `defaultValue` if source is empty or if no element passes the test specified by predicate; otherwise, the first element in source that passes the test specified by predicate.
+     */
     firstOrDefault(
         defaultValue: TItem,
         predicateFunc?: (itm: TItem) => boolean): TItem {
@@ -319,10 +324,9 @@ export default class LinqArray<TItem> extends Array<TItem> {
             return this.length === 0 ? defaultValue : this[0];
         }
 
-        let idx: number;
         let item: TItem;
 
-        for (idx = 0; idx < this.length; idx++) {
+        for (let idx = 0; idx < this.length; idx++) {
             item = this[idx];
 
             if (predicateFunc(item)) {
@@ -331,6 +335,50 @@ export default class LinqArray<TItem> extends Array<TItem> {
         }
 
         return defaultValue;
+    };
+
+    /**
+     * Groups the elements of a sequence according to a specified key selector function.
+     * @param keySelectorFunc A function to extract the key for each element.
+     * @returns A LinqArray<{TKey, TResultItem}> of groups, where each group object contains a key and a collection of objects.
+     */
+    groupBy<TKey, TResultItem>(
+        keySelectorFunc: (itm: TItem) => TKey,
+        elementSelectorFunc: (itm: TItem) => TResultItem
+    ): LinqArray<{ key: TKey, items: LinqArray<TResultItem> }> {
+
+        let groups = new LinqArray<{ key: TKey, items: LinqArray<TResultItem> }>;
+
+        if (this.length === 0) {
+            return groups;
+        }
+
+        let itemGroupKey: TKey;
+        let group: { key: TKey, items: LinqArray<TResultItem> };
+
+        this.forEach((valueOfElement, indexInArray) => {
+
+            // Get item's group key
+            itemGroupKey = keySelectorFunc(valueOfElement);
+
+            // Find for the current item's group, or create a new one
+            group = groups.firstOrDefault(
+                { key: itemGroupKey, items: new LinqArray<TResultItem>() },
+                (grp: { key: TKey, items: LinqArray<TResultItem> }): boolean => grp.key == itemGroupKey
+            );
+
+            // Add this group to the groups collection if new, i.e. no items
+            if (group.items.length === 0) {
+                groups.push(group);
+            }
+
+            // Add current item to the group's items
+            let item: TResultItem = elementSelectorFunc(valueOfElement);
+
+            group.items.push(item);
+        });
+
+        return groups;
     };
 
     /**
