@@ -310,6 +310,29 @@ export default class LinqArray<TItem> extends Array<TItem> {
         throw new Error("NoElements");
     };
 
+    firstOrDefault(
+        defaultValue: TItem,
+        predicateFunc?: (itm: TItem) => boolean): TItem {
+
+        if (predicateFunc === undefined) {
+
+            return this.length === 0 ? defaultValue : this[0];
+        }
+
+        let idx: number;
+        let item: TItem;
+
+        for (idx = 0; idx < this.length; idx++) {
+            item = this[idx];
+
+            if (predicateFunc(item)) {
+                return item;
+            }
+        }
+
+        return defaultValue;
+    };
+
     /**
      * Projects each element of a sequence into a new form, optionally incorporating the element's index.
      * @param transformFunc A transform function to apply to each source element; the second parameter of the function represents the index of the source element.
