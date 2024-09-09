@@ -39,12 +39,14 @@ export default class LinqArray<TItem> extends Array<TItem> {
      * @param {ArrayLike} items List of items to add.
      */
     addItems(items: Array<TItem>): void {
+
         items.forEach(item => this.push(item));
     }
 
     /**
      * Determines whether all elements of a sequence satisfy a condition.
      * @param func A function to test each element for a condition.
+     * @returns `true` if every element of the sequence passes the test in the specified predicate function, or if the sequence is empty; otherwise, `false`.
      */
     all(func: (current: TItem, indexInArray: number) => boolean) {
 
@@ -68,7 +70,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
     /**
      * Determines whether a sequence contains any elements, or whether any element satisfies a condition.
      * @param func An optional function to test each element for a condition.
-     * @returns true if the source sequence is not empty and at least one of its elements passes the test in the specified predicate (if specified); otherwise, false
+     * @returns `true` if the source sequence is not empty and at least one of its elements passes the test in the specified predicate (if specified); otherwise, `false`.
      */
     any(func?: (current: TItem, indexInArray: number) => boolean) {
 
@@ -94,7 +96,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
      * @param func An accumulator function to be invoked on each element.
      * @param seed Optional seed value used as the initial accumulator value.
      * @param resultSelector Optional function used to select the final result value.
-     * @returns A value of type TItem
+     * @returns A value of type `TItem`.
      */
     aggregate(
         func: (result: TItem, current: TItem) => TItem,
@@ -130,7 +132,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
     /**
      * Computes the average of a sequence of numeric values.
      * @param selectorFunc An optional transform function to apply to each element. 
-     * @returns 
+     * @returns The average of the sequence of values.
      */
     average(
         selectorFunc?: (result: TItem) => number
@@ -155,7 +157,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
     /**
      * Concatenates a second sequence to the current sequence.
      * @param secondItems The sequence to concatenate to the current sequence.
-     * @returns An LinqArray<TItem> that contains the concatenated elements of the current sequence and the second sequence.
+     * @returns A `LinqArray<TItem>` that contains the concatenated elements of the current sequence and the second sequence.
      */
     concat(
         secondItems: LinqArray<TItem>
@@ -212,7 +214,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
     /**
      * Returns distinct elements from a sequence by using the default equality comparer to compare values, or an optional custom comparer.
      * @param comparerFunc An optional equality comparer function to compare values.
-     * @returns A new LinqArray<TItem> that contains distinct elements from the source sequence.
+     * @returns A new `LinqArray<TItem>` that contains distinct elements from the source sequence.
      */
     distinct(
         comparerFunc?: (first: TItem, second: TItem) => boolean
@@ -234,7 +236,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
     /**
      * Returns the element at a specified index in a sequence.
      * @param index The index of the element to retrieve, which is either from the beginning or the end of the sequence.
-     * @returns The element at the specified position in the source sequence.
+     * @returns The element at the specified position in the sequence.
      */
     elementAt(index: number): TItem {
 
@@ -277,11 +279,41 @@ export default class LinqArray<TItem> extends Array<TItem> {
 
         return results;
     };
-    
+
+    /**
+     * Returns the first element in a sequence that optionally satisfies a specified condition.
+     * @param predicateFunc An optional function to test each element for a condition.
+     * @returns The first element in the sequence that optionally passes the test in the specified predicate function (if specified).
+     */
+    first(predicateFunc?: (itm: TItem) => boolean): TItem {
+
+        if (predicateFunc == undefined) {
+
+            if (this.length === 0) {
+                throw new Error("NoElements");
+            }
+
+            return this[0];
+        }
+
+        let item: TItem;
+        let idx: number;
+
+        for (idx = 0; idx < this.length; idx++) {
+            item = this[idx];
+
+            if (predicateFunc(item)) {
+                return item;
+            }
+        }
+
+        throw new Error("NoElements");
+    };
+
     /**
      * Projects each element of a sequence into a new form, optionally incorporating the element's index.
      * @param transformFunc A transform function to apply to each source element; the second parameter of the function represents the index of the source element.
-     * @returns 
+     * @returns A LinqArray<TResultItem> whose elements are the result of invoking the transform function on each element of the LinqArray instance.
      */
     select<TResultItem>(
         transformFunc: (valueOfElement: TItem, indexInArray: number) => TResultItem
@@ -302,7 +334,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
     /**
      * Filters a sequence of values based on a predicate.
      * @param func A function to test each element for a condition.
-     * @returns A new LinqArray that contains elements from the input sequence that satisfy the condition.
+     * @returns A new `LinqArray<TItem>` that contains elements from the input sequence that satisfy the condition.
      */
     where(
         func: (valueOfElement: TItem, indexInArray: number) => boolean): LinqArray<TItem> {
