@@ -316,7 +316,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
             }
         }
 
-        throw new Error("NoElements");
+        throw new Error("NoMatchingElements");
     };
 
     /**
@@ -413,6 +413,35 @@ export default class LinqArray<TItem> extends Array<TItem> {
         });
 
         return results;
+    };
+
+    /**
+     * Returns the last element of a sequence that satisfies an optional specified condition.
+     * @param predicateFunc An optional function to test each element for a condition.
+     * @returns The last element in the sequence that optionally passes the test in the specified optional predicate function.
+     */
+    last(predicateFunc?: (itm: TItem) => boolean) {
+
+        if (predicateFunc === undefined) {
+
+            if (this.length == 0) {
+                throw new Error("NoElements");
+            }
+
+            return this[this.length - 1];
+        }
+
+        let item: TItem;
+
+        for (let idx: number = this.length - 1; idx >= 0; idx--) {
+            item = this[idx];
+
+            if (predicateFunc(item)) {
+                return item;
+            }
+        }
+
+        throw new Error("NoMatchingElements");
     };
 
     /**

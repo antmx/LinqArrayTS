@@ -2,7 +2,7 @@
 import { describe, expect, test } from "@jest/globals";
 import LinqArray from "../src/LinqArray";
 
-describe('first', () => {
+describe('last', () => {
 
     let _items: number[];
 
@@ -11,22 +11,22 @@ describe('first', () => {
         _items = [1, 2, 3, 4, 5, 6, 7, 8];
     });
 
-    test("Returns first item", () => {
+    test("Returns last item", () => {
 
         let items = new LinqArray(_items);
-        let result = items.first();
+        let result = items.last();
 
-        let expected = 1;
+        let expected = 8;
 
         expect(result).toEqual(expected);
     });
 
-    test("Returns first matching item", () => {
+    test("Returns last matching item", () => {
 
         let items = new LinqArray(_items);
-        let result = items.first((i) => i > 3);
+        let result = items.last(i => i < 7);
 
-        let expected = 4;
+        let expected = 6;
 
         expect(result).toEqual(expected);
     });
@@ -36,7 +36,7 @@ describe('first', () => {
         let items = new LinqArray();
 
         expect(() => {
-            items.first();
+            items.last();
         }).toThrow('NoElements');
     });
 
@@ -45,7 +45,7 @@ describe('first', () => {
         let items = new LinqArray(_items);
 
         expect(() => {
-            items.first(i => i > 8);
+            items.last(i => i > 8);
         }).toThrow('NoMatchingElements');
     });
 
