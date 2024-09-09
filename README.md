@@ -39,7 +39,7 @@ LinqArray includes equivalents of these common .NET LINQ, Generic and Array meth
 - [intersect](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.intersect)
 - [last](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.last)
 - [max](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.max)
-- [min](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.min) TODO
+- [min](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.min)
 - [orderBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderBy) TODO
 - [orderByDescending](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderByDescending) TODO
 - [reverse](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.reverse) TODO
