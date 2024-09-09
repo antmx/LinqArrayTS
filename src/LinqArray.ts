@@ -161,6 +161,21 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
+     * Creates a shallow copy of the `LinqArray`.
+     * @returns A new LinqArray containing the source array's items.
+     */
+    clone(): LinqArray<TItem> {
+
+        let result = new LinqArray<TItem>();
+
+        this.forEach(itm => {
+            result.push(itm);
+        });
+
+        return result;
+    };
+
+    /**
      * Concatenates a second sequence to the current sequence.
      * @param secondItems The sequence to concatenate to the current sequence.
      * @returns A `LinqArray<TItem>` that contains the concatenated elements of the current sequence and the second sequence.
@@ -541,13 +556,29 @@ export default class LinqArray<TItem> extends Array<TItem> {
         return items;
     };
 
-    clone() {
+    /**
+     * Sorts the elements of a sequence in descending order, optionally using a custom comparer function.
+     * @param keySelectorFunc A function to extract the key for each element.
+     * @param comparerFunc An optional equality comparer to compare values.
+     * @returns A `LinqArray<TItem>` whose elements are sorted in descending order according to a key.
+     */
+    orderByDescending<TKey>(
+        keySelectorFunc: (itm: TItem) => TKey,
+        comparerFunc?: (first: TKey, second: TKey) => number
+    ): LinqArray<TItem> {
 
-        let result = new LinqArray<TItem>();
+        let results = this.orderBy(keySelectorFunc, comparerFunc).reverse2();
 
-        this.forEach(itm => {
-            result.push(itm);
-        });
+        return results;
+    };
+
+    /**
+     * Creates a new `LinqArray<TItem>` containing the items of the source array in reverse order.
+     */
+    reverse2(): LinqArray<TItem> {
+
+        let resultItems = this.clone().reverse();
+        let result = new LinqArray(resultItems);
 
         return result;
     };
