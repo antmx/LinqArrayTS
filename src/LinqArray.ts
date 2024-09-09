@@ -382,6 +382,29 @@ export default class LinqArray<TItem> extends Array<TItem> {
     };
 
     /**
+     * Produces the set intersection of two sequences, using an optional equality comparer method to compare values.
+     * @param secondItems A LinqArray<TItem> whose distinct elements that also appear in the first sequence will be returned.
+     * @param comparerFunc? An optional equality comparer function to compare values.
+     * @returns A sequence that contains the elements that form the set intersection of two sequences.
+     */
+    intersect(
+        secondItems: LinqArray<TItem>,
+        comparerFunc?: (first: TItem, second: TItem) => boolean
+    ): LinqArray<TItem> {
+
+        var results = new LinqArray<TItem>();
+
+        this.distinct(comparerFunc).forEach(function (valueOfElement, indexInArray) {
+
+            if (secondItems.contains(valueOfElement, comparerFunc)) {
+                results.push(valueOfElement);
+            }
+        });
+
+        return results;
+    };
+
+    /**
      * Projects each element of a sequence into a new form, optionally incorporating the element's index.
      * @param transformFunc A transform function to apply to each source element; the second parameter of the function represents the index of the source element.
      * @returns A LinqArray<TResultItem> whose elements are the result of invoking the transform function on each element of the LinqArray instance.
