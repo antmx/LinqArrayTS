@@ -38,7 +38,9 @@ export default class LinqArray<TItem> extends Array<TItem> {
      * @param items The items to add.
      * @param {ArrayLike} items List of items to add.
      */
-    addItems(items: Array<TItem>): void {
+    addItems(
+        items: Array<TItem>
+    ): void {
 
         items.forEach(item => this.push(item));
     }
@@ -48,7 +50,9 @@ export default class LinqArray<TItem> extends Array<TItem> {
      * @param func A function to test each element for a condition.
      * @returns `true` if every element of the sequence passes the test in the specified predicate function, or if the sequence is empty; otherwise, `false`.
      */
-    all(func: (current: TItem, indexInArray: number) => boolean) {
+    all(
+        func: (current: TItem, indexInArray: number) => boolean
+    ) {
 
         if (func === undefined) {
             throw new Error("ArgumentNull 'func'");
@@ -72,7 +76,9 @@ export default class LinqArray<TItem> extends Array<TItem> {
      * @param func An optional function to test each element for a condition.
      * @returns `true` if the source sequence is not empty and at least one of its elements passes the test in the specified predicate (if specified); otherwise, `false`.
      */
-    any(func?: (current: TItem, indexInArray: number) => boolean) {
+    any(
+        func?: (current: TItem, indexInArray: number) => boolean
+    ) {
 
         if (func === undefined) {
             return this.length > 0;
@@ -238,7 +244,9 @@ export default class LinqArray<TItem> extends Array<TItem> {
      * @param index The index of the element to retrieve, which is either from the beginning or the end of the sequence.
      * @returns The element at the specified position in the sequence.
      */
-    elementAt(index: number): TItem {
+    elementAt(
+        index: number
+    ): TItem {
 
         if (this.length > index) {
             return this[index];
@@ -285,7 +293,9 @@ export default class LinqArray<TItem> extends Array<TItem> {
      * @param predicateFunc An optional function to test each element for a condition.
      * @returns The first element in the sequence that optionally passes the test in the specified predicate function (if specified).
      */
-    first(predicateFunc?: (itm: TItem) => boolean): TItem {
+    first(
+        predicateFunc?: (itm: TItem) => boolean
+    ): TItem {
 
         if (predicateFunc == undefined) {
 
@@ -317,7 +327,8 @@ export default class LinqArray<TItem> extends Array<TItem> {
      */
     firstOrDefault(
         defaultValue: TItem,
-        predicateFunc?: (itm: TItem) => boolean): TItem {
+        predicateFunc?: (itm: TItem) => boolean
+    ): TItem {
 
         if (predicateFunc === undefined) {
 
@@ -431,7 +442,8 @@ export default class LinqArray<TItem> extends Array<TItem> {
      * @returns A new `LinqArray<TItem>` that contains elements from the input sequence that satisfy the condition.
      */
     where(
-        func: (valueOfElement: TItem, indexInArray: number) => boolean): LinqArray<TItem> {
+        func: (valueOfElement: TItem, indexInArray: number) => boolean
+    ): LinqArray<TItem> {
 
         let result = new LinqArray<TItem>();
 
