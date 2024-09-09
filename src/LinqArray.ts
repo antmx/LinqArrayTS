@@ -605,6 +605,40 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
+     * Projects each element of a sequence to an LinqArray<TCollectionItem>, flattens the resulting sequences into one sequence, and invokes a result selector function on each element therein.
+     * @param subCollectionSelectorFunc A transform function to apply to each element of the input sequence.
+     * @param transformFunc A transform function to apply to each element of the intermediate sequence.
+     * @returns An `LinqArray<TResultItem>` whose elements are the result of invoking the one-to-many transform function `collectionSelector` 
+     * on each element of source and then mapping each of those sequence elements and their corresponding source element to a result element.
+     */
+    selectMany<TCollectionItem, TResultItem>(
+        subCollectionSelectorFunc: (itm: TItem) => LinqArray<TCollectionItem>,
+        transformFunc: (valueOfElement: TCollectionItem, indexInArray: number) => TResultItem
+    ): LinqArray<TResultItem> {
+
+        if (this.length === 0) {
+            return new LinqArray<TResultItem>();
+        }
+
+        let results = new LinqArray<TResultItem>();
+        let subElements = new LinqArray<TCollectionItem>();
+        let resultItem: TResultItem = null!;
+
+        this.forEach((valueOfElement, indexInArray) => {
+
+            subElements = subCollectionSelectorFunc(valueOfElement);
+
+            subElements.forEach((subValueOfElement, subIndexInArray) => {
+
+                resultItem = transformFunc(subValueOfElement, indexInArray);
+                results.push(resultItem);
+            });
+        });
+
+        return results;
+    };
+
+    /**
      * Filters a sequence of values based on a predicate.
      * @param func A function to test each element for a condition.
      * @returns A new `LinqArray<TItem>` that contains elements from the input sequence that satisfy the condition.
