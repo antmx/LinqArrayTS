@@ -499,6 +499,60 @@ export default class LinqArray<TItem> extends Array<TItem> {
     };
 
     /**
+     * Sorts the elements of a sequence in ascending order, using an optional custom comparer function.
+     * @param keySelectorFunc A function to extract the key for each element.
+     * @param comparerFunc An optional equality comparer to compare values.
+     * @returns A `LinqArray<TItem>` whose elements are sorted according to a key.
+     */
+    orderBy<TKey>(
+        keySelectorFunc: (itm: TItem) => TKey,
+        comparerFunc?: (first: TKey, second: TKey) => number
+    ): LinqArray<TItem> {
+
+        let items = this.clone();
+
+        let compareFn: (first: TItem, second: TItem) => number
+
+        if (comparerFunc == undefined) {
+            compareFn = (a: TItem, b: TItem) => {
+
+                if (keySelectorFunc(a) < keySelectorFunc(b)) {
+                    return -1;
+                }
+
+                if (keySelectorFunc(a) > keySelectorFunc(b)) {
+                    return 1;
+                }
+
+                return 0;
+
+            };
+        } else {
+            compareFn = (a: TItem, b: TItem) => {
+                let keyA = keySelectorFunc(a);
+                let keyB = keySelectorFunc(b);
+
+                return comparerFunc(keyA, keyB);
+            };
+        }
+
+        items.sort(compareFn);
+
+        return items;
+    };
+
+    clone() {
+
+        let result = new LinqArray<TItem>();
+
+        this.forEach(itm => {
+            result.push(itm);
+        });
+
+        return result;
+    };
+
+    /**
      * Projects each element of a sequence into a new form, optionally incorporating the element's index.
      * @param transformFunc A transform function to apply to each source element; the second parameter of the function represents the index of the source element.
      * @returns A LinqArray<TResultItem> whose elements are the result of invoking the transform function on each element of the LinqArray instance.
