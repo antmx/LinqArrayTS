@@ -16,10 +16,6 @@ let firstOver4Times10 = items
     .first();               // first item
 
 // firstOver4times10 === 50 and is of type number
-
-let expected = 50;
-
-expect(firstOver4Times10).toEqual(expected);
 ```
 
 LinqArray includes equivalents of these common .NET LINQ, Generic and Array methods:
