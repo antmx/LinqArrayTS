@@ -445,6 +445,33 @@ export default class LinqArray<TItem> extends Array<TItem> {
     };
 
     /**
+     * Returns the maximum value in a generic sequence.
+     * @param comparerFunc An optional comparer function to compare values.
+     * @returns The maximum value in the sequence.
+     */
+    max(
+        comparerFunc?: (first: TItem, second: TItem) => boolean
+    ): TItem {
+
+        if (comparerFunc == undefined) {
+            comparerFunc = function (first: TItem, second: TItem) {
+                return first > second;
+            };
+        }
+
+        let result: TItem = null!;
+
+        this.forEach((valueOfElement, indexInArray) => {
+
+            if (!result || comparerFunc(valueOfElement, result)) {
+                result = valueOfElement;
+            }
+        });
+
+        return result;
+    };
+
+    /**
      * Projects each element of a sequence into a new form, optionally incorporating the element's index.
      * @param transformFunc A transform function to apply to each source element; the second parameter of the function represents the index of the source element.
      * @returns A LinqArray<TResultItem> whose elements are the result of invoking the transform function on each element of the LinqArray instance.
