@@ -212,7 +212,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
 
         let result = false;
 
-        this.forEach(function (valueOfElement, indexInArray) {
+        this.forEach((valueOfElement, indexInArray) => {
 
             if (comparerFunc(valueOfElement, value)) {
                 result = true;
@@ -420,7 +420,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
 
         let results = new LinqArray<TItem>();
 
-        this.distinct(comparerFunc).forEach(function (valueOfElement, indexInArray) {
+        this.distinct(comparerFunc).forEach((valueOfElement, indexInArray) => {
 
             if (secondItems.contains(valueOfElement, comparerFunc)) {
                 results.push(valueOfElement);
@@ -469,7 +469,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
     ): TItem {
 
         if (comparerFunc == undefined) {
-            comparerFunc = function (first: TItem, second: TItem) {
+            comparerFunc = (first: TItem, second: TItem) => {
                 return first > second;
             };
         }
@@ -496,14 +496,14 @@ export default class LinqArray<TItem> extends Array<TItem> {
     ): TItem {
 
         if (comparerFunc == undefined) {
-            comparerFunc = function (first, second) {
+            comparerFunc = (first, second) => {
                 return first < second;
             };
         }
 
         let result: TItem = null!;
 
-        this.forEach(function (valueOfElement, indexInArray) {
+        this.forEach((valueOfElement, indexInArray) => {
 
             if (!result || comparerFunc(valueOfElement, result)) {
                 result = valueOfElement;
