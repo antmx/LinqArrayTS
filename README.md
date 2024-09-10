@@ -6,8 +6,8 @@ TypeScript code example
 import LinqArray from '../src/LinqArray';
 
 let jsItems = [1, 2, 3, 4, 5, 6, 7, 8]; // Standard JS array of numbers
-let items1 = new LinqArray<number>(jsItems); // items is of type LinqArray<number>, constructed from the standard JS array of numbers
-let items2 = new LinqArray(jsItems); // Simplified constructor where generic type (number) is inferred from the source array
+let items1 = new LinqArray<number>(jsItems); // items1 is of type LinqArray<number>, constructed from the standard JS array of numbers
+let items2 = new LinqArray(jsItems); // Simplified constructor call - generic type (number) is inferred from source array
 
 let firstOver4Times10 = items2
     .where(i => i > 4)      // items > 4
