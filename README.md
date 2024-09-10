@@ -44,7 +44,7 @@ LinqArray includes equivalents of these common .NET LINQ, Generic and Array meth
 - [select](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.select)
 - [selectMany](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.selectMany)
 - [setValue](https://learn.microsoft.com/en-us/dotnet/api/system.array.setvalue)
-- [single](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.single) TODO
+- [single](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.single)
 - [singleOrDefault](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.singleOrDefault) TODO
 - [skip](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skip) TODO
 - [skipWhile](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skipWhile) TODO

@@ -9,7 +9,13 @@ export default class LinqArray<TItem> extends Array<TItem> {
      * @param items An optional array of items to add to the new {@link LinqArray} instance
      */
     constructor(items?: Array<TItem>) {
+
         if (items != null) {
+
+            if (items.length === 1) {
+                throw new Error("Cannot construct with single-item array; try parameterless constructor, then call .push(item: TItem)");
+            }
+
             super(...items)
         }
         else {
@@ -668,6 +674,45 @@ export default class LinqArray<TItem> extends Array<TItem> {
         }
 
         currentDimensionArray[currentIndex] = value;
+    };
+
+    /**
+     * Returns the only element of a sequence that satisfies an optional specified condition, and throws an exception if more than one such element exists.
+     * @param predicateFunc An optional function to test an element for a condition.
+     * @returns The single element of the input sequence that satisfies a condition.
+     */
+    single(
+        predicateFunc?: (itm: TItem) => boolean
+    ): TItem {
+
+        if (this.length === 0) {
+            throw new Error("NoElements")
+        }
+
+        let count = 0;
+
+        if (predicateFunc == undefined) {
+            predicateFunc = (valueOfElement: TItem) => {
+                return true;
+            };
+        }
+
+        let result: TItem = null!;
+
+        this.forEach((valueOfElement, indexInArray) => {
+
+            if (predicateFunc(valueOfElement)) {
+                result = valueOfElement;
+                count++;
+            }
+        });
+
+        switch (count) {
+            case 0: throw new Error("NoMatchingElements");
+            case 1: return result;
+        }
+
+        throw new Error("MoreThanOneMatchingElements");
     };
 
     /**
