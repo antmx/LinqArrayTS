@@ -43,7 +43,7 @@ LinqArray includes equivalents of these common .NET LINQ, Generic and Array meth
 - [reverse2](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.reverse)
 - [select](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.select)
 - [selectMany](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.selectMany)
-- [setValue](https://learn.microsoft.com/en-us/dotnet/api/system.array.setvalue) TODO
+- [setValue](https://learn.microsoft.com/en-us/dotnet/api/system.array.setvalue)
 - [single](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.single) TODO
 - [singleOrDefault](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.singleOrDefault) TODO
 - [skip](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skip) TODO

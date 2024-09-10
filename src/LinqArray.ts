@@ -639,6 +639,38 @@ export default class LinqArray<TItem> extends Array<TItem> {
     };
 
     /**
+     * Sets the specified element in the current Array to the specified value.
+     * @param value The new value for the specified element.
+     * @param indices A one-dimensional array of integers that represent the indexes specifying the co-ordinates of the element to set in an n-demonsional array.
+     */
+    setValue(
+        value: any, indices: number | number[]
+    ): void {
+
+        if (typeof indices === "number") {
+            indices = [indices];
+        }
+
+        if ((indices as number[]).length === 0) {
+            throw new Error("NoElements 'indices'");
+        }
+
+        let currentDimensionArray: Array<any> = this;
+        let currentIndex = -1;
+
+        for (let idx = 0; idx < indices.length; idx++) {
+
+            currentIndex = indices[idx];
+
+            if (idx < indices.length - 1) {
+                currentDimensionArray = currentDimensionArray[indices[idx]];
+            }
+        }
+
+        currentDimensionArray[currentIndex] = value;
+    };
+
+    /**
      * Filters a sequence of values based on a predicate.
      * @param func A function to test each element for a condition.
      * @returns A new `LinqArray<TItem>` that contains elements from the input sequence that satisfy the condition.
