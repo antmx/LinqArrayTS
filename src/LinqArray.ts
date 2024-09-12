@@ -342,7 +342,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
 
     /**
      * Returns the first element of a sequence, or a default value if no element is found.
-     * @param defaultValue The default value to return if the sequence is empty.
+     * @param defaultValue The default value to return if the sequence is empty or no matching item is found.
      * @param predicateFunc An optional function to test each element for a condition.
      * @returns `defaultValue` if source is empty or if no element passes the test specified by predicate; otherwise, the first element in source that passes the test specified by predicate.
      */
@@ -709,6 +709,47 @@ export default class LinqArray<TItem> extends Array<TItem> {
 
         switch (count) {
             case 0: throw new Error("NoMatchingElements");
+            case 1: return result;
+        }
+
+        throw new Error("MoreThanOneMatchingElements");
+    };
+
+    /**
+     * Returns a single, specific element of a sequence, that optionally satisfies an optional condition, or a default value if that element is not found.
+     * @param defaultValue The default value to return if the sequence is empty or no matching item is found.
+     * @param predicateFunc An optional function to test an element for a condition.
+     * @returns The single element of the input sequence that optionally satisfies the condition, or `defaultValue` if no such element is found.
+     */
+    singleOrDefault(
+        defaultValue: TItem,
+        predicateFunc?: (itm: TItem) => boolean
+    ): TItem {
+
+        if (this.length === 0) {
+            throw new Error("NoElements")
+        }
+
+        let count = 0;
+
+        if (predicateFunc == undefined) {
+            predicateFunc = function () {
+                return true;
+            };
+        }
+
+        let result: TItem = null!;
+
+        this.forEach((valueOfElement, indexInArray) => {
+
+            if (predicateFunc(valueOfElement)) {
+                result = valueOfElement;
+                count += 1;
+            }
+        });
+
+        switch (count) {
+            case 0: return defaultValue;
             case 1: return result;
         }
 
