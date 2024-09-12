@@ -757,6 +757,29 @@ export default class LinqArray<TItem> extends Array<TItem> {
     };
 
     /**
+     * 
+     * @param count 
+     * @returns 
+     */
+    skip(count: number) {
+
+        let results = new LinqArray<TItem>();
+
+        if (count <= 0) {
+            return results;
+        }
+
+        this.forEach((valueOfElement, indexInArray) => {
+
+            if (indexInArray + 1 > count) {
+                results.push(valueOfElement);
+            }
+        });
+
+        return results;
+    };
+
+    /**
      * Filters a sequence of values based on a predicate.
      * @param func A function to test each element for a condition.
      * @returns A new `LinqArray<TItem>` that contains elements from the input sequence that satisfy the condition.
