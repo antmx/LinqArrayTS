@@ -757,11 +757,11 @@ export default class LinqArray<TItem> extends Array<TItem> {
     };
 
     /**
-     * 
-     * @param count 
-     * @returns 
+     * Bypasses a specified number of elements in a sequence and then returns the remaining elements.
+     * @param count The number of elements to skip before returning the remaining elements.
+     * @returns An new `LinqArray<TItem>` that contains the elements that occur after the specified index in the input sequence.
      */
-    skip(count: number) {
+    skip(count: number): LinqArray<TItem> {
 
         let results = new LinqArray<TItem>();
 
@@ -772,6 +772,32 @@ export default class LinqArray<TItem> extends Array<TItem> {
         this.forEach((valueOfElement, indexInArray) => {
 
             if (indexInArray + 1 > count) {
+                results.push(valueOfElement);
+            }
+        });
+
+        return results;
+    };
+
+    /**
+     * Bypasses elements in a sequence as long as a specified condition is true and then returns the remaining elements. The element's index is used in the logic of the predicate function.
+     * @param predicateFunc A function to test each element for a condition.
+     * @returns A new LinqArray<TItem> that contains the elements from the input sequence starting at the first element in the linear series that does not pass the test specified by predicate.
+     */
+    skipWhile(
+        predicateFunc: (itm: TItem, idx: number) => boolean
+    ): LinqArray<TItem> {
+
+        let results = new LinqArray<TItem>();
+        let yielding = false;
+
+        this.forEach((valueOfElement, indexInArray) => {
+
+            if (!yielding && !predicateFunc(valueOfElement, indexInArray)) {
+                yielding = true;
+            }
+
+            if (yielding) {
                 results.push(valueOfElement);
             }
         });
