@@ -804,6 +804,34 @@ export default class LinqArray<TItem> extends Array<TItem> {
 
         return results;
     };
+    
+    /** Computes the sum of the sequence of numeric values that are obtained by invoking a transform function on each element of the input sequence.
+    * @param transformFunc Optional function that transforms, or selects a property of, the items before summing them.
+    * @returns {number} Returns a number representing the sum total.
+    */
+    sum(
+        transformFunc?: (itm: TItem, idx: number) => number
+    ): number {
+
+        if (transformFunc == undefined) {
+
+            transformFunc = (itm: TItem) => {
+
+                let parsed = parseFloat(new Object(itm).toString());
+
+                return isNaN(parsed) ? 0 : parsed;
+            };
+        }
+
+        let total = 0;
+
+        this.forEach((valueOfElement, indexInArray) => {
+
+            total += transformFunc(valueOfElement, indexInArray);
+        });
+
+        return total;
+    };
 
     /**
      * Filters a sequence of values based on a predicate.
