@@ -218,7 +218,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
 
         let result = false;
         let valueOfElement: TItem;
-        
+
         for (let indexInArray = 0; indexInArray < this.length; indexInArray++) {
             valueOfElement = this[indexInArray];
 
@@ -900,6 +900,34 @@ export default class LinqArray<TItem> extends Array<TItem> {
                 break;
             }
         }
+
+        return results;
+    };
+
+    /**
+     * Produces the set union of two sequences, i.e. only items that exist in both sequences, using an optional equality comparer function.
+     * @param secondItems A LinqArray<TItem> whose distinct elements form the second set for the union.
+     * @param comparerFunc An optional equality comparer function to compare values.
+     * @returns A new LinqArray<TItem> that contains the elements from both input sequences, excluding duplicates.
+     */
+    union(
+        secondItems: LinqArray<TItem>,
+        comparerFunc?: (first: TItem, second: TItem) => boolean
+    ): LinqArray<TItem> {
+
+        let results = new LinqArray<TItem>();
+
+        let firstItems = this.distinct(comparerFunc);
+        secondItems = secondItems.distinct(comparerFunc);
+
+        results.push.apply(results, firstItems);
+
+        secondItems.forEach((valueOfElement, indexInArray) => {
+
+            if (!results.contains(valueOfElement, comparerFunc)) {
+                results.push(valueOfElement);
+            }
+        });
 
         return results;
     };

@@ -14,7 +14,6 @@ describe('takeWhile', () => {
     test("Returns elements from a list as long as a specified condition is true.", () => {
 
         let items = new LinqArray(_items);
-        debugger;
         let result = items.takeWhile(s => s != "orange");
         let expected = ["apple", "banana", "mango"];
 
