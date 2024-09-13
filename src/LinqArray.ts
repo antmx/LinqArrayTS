@@ -217,14 +217,16 @@ export default class LinqArray<TItem> extends Array<TItem> {
         }
 
         let result = false;
-
-        this.forEach((valueOfElement, indexInArray) => {
+        let valueOfElement: TItem;
+        
+        for (let indexInArray = 0; indexInArray < this.length; indexInArray++) {
+            valueOfElement = this[indexInArray];
 
             if (comparerFunc(valueOfElement, value)) {
                 result = true;
-                return false; // break out of forEach
+                break;
             }
-        });
+        }
 
         return result;
     };
@@ -780,7 +782,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
     };
 
     /**
-     * Bypasses elements in a sequence as long as a specified condition is true and then returns the remaining elements. The element's index is used in the logic of the predicate function.
+     * Bypasses elements in a sequence as long as a specified condition is true and then returns the remaining elements. The element's index can be used in the logic of the predicate function.
      * @param predicateFunc A function to test each element for a condition.
      * @returns A new LinqArray<TItem> that contains the elements from the input sequence starting at the first element in the linear series that does not pass the test specified by predicate.
      */
@@ -873,6 +875,31 @@ export default class LinqArray<TItem> extends Array<TItem> {
                 return false;
             }
         });
+
+        return results;
+    };
+
+    /**
+     * Returns elements from a sequence as long as a specified condition is true. The element's index can be used in the logic of the predicate function.
+     * @param predicateFunc A function to test each source element for a condition; the second parameter of the function represents the index of the source element.
+     * @returns An new LinqArray<TItem> that contains elements from the input sequence that occur before the element at which the test no longer passes.
+     */
+    takeWhile(
+        predicateFunc: (itm: TItem, idx: number) => boolean
+    ): LinqArray<TItem> {
+
+        let results = new LinqArray<TItem>();
+        let valueOfElement: TItem;
+
+        for (let indexInArray = 0; indexInArray < this.length; indexInArray++) {
+            valueOfElement = this[indexInArray];
+
+            if (predicateFunc(valueOfElement, indexInArray)) {
+                results.push(valueOfElement);
+            } else {
+                break;
+            }
+        }
 
         return results;
     };
