@@ -804,7 +804,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
 
         return results;
     };
-    
+
     /** Computes the sum of the sequence of numeric values that are obtained by invoking a transform function on each element of the input sequence.
     * @param transformFunc Optional function that transforms, or selects a property of, the items before summing them.
     * @returns {number} Returns a number representing the sum total.
@@ -831,6 +831,50 @@ export default class LinqArray<TItem> extends Array<TItem> {
         });
 
         return total;
+    };
+
+    /**
+     * Returns a specified range of contiguous elements from a sequence.
+     * @param range Either: 
+     * 1) The number of items to return from the start of the sequence (e.g. `2` returns the first two items). 
+     * 2) The range of indexes (inclusive) to return (e.g. `[3, 5]` returns the fourth to sixth items). 
+     * 3) The number of items to return from the end (e.g. [3, -1] returns the last three items).
+     * @returns A new `LinqArray<TItem>` that contains the specified range of elements from the source sequence.
+     */
+    take(range: number | number[]) {
+
+        let results = new LinqArray<TItem>();
+        let actualStartIdx: number = 0;
+        let actualEndIdx: number = 0;
+
+        if (typeof range === "number") {
+            // Count from start
+            actualStartIdx = 0;
+            actualEndIdx = range - 1;
+        }
+        else if (range[1] == -1) {
+            // Count from the end
+            actualEndIdx = this.length - 1;
+            actualStartIdx = actualEndIdx - range[0] + 1;
+        }
+        else {
+            // Index range
+            actualStartIdx = range[0];
+            actualEndIdx = range[1];
+        }
+
+        this.forEach((valueOfElement, indexInArray) => {
+
+            if (indexInArray >= actualStartIdx && indexInArray <= actualEndIdx) {
+                results.push(valueOfElement);
+            }
+            else if (indexInArray > actualEndIdx) {
+                // Exit forEach
+                return false;
+            }
+        });
+
+        return results;
     };
 
     /**
