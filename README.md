@@ -53,4 +53,4 @@ LinqArray includes equivalents of these common .NET LINQ, Generic and Array meth
 - [takeWhile](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.takeWhile)
 - [union](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.union)
 - [where](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.where)
-- [zip](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.zip) TODO
+- [zip](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.zip)

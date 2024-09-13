@@ -952,4 +952,43 @@ export default class LinqArray<TItem> extends Array<TItem> {
         return result;
     }
 
+    /**
+     * Applies a specified function to the corresponding elements of two sequences, producing a sequence of the results.
+     * @param secondItems The second sequence to merge.
+     * @param resultSelectorFunc A function that specifies how to merge the elements from the two sequences.
+     * @template TSecondItem The type of the elements of the second input sequence.
+     * @template TResultItem The type of the elements of the result sequence.
+     * @returns A `LinqArray<TResultItem>` that contains merged elements of the two input sequences.
+     */
+    zip<TSecondItem, TResultItem>(
+        secondItems: LinqArray<TSecondItem>,
+        resultSelectorFunc: (first: TItem, second: TSecondItem) => TResultItem
+    ): LinqArray<TResultItem> {
+
+        if (this.length == 0) {
+            throw new Error("NoElements");
+        }
+
+        if (secondItems?.length == 0) {
+            throw new Error("NoElements 'secondItems'");
+        }
+
+        let result = new LinqArray<TResultItem>;
+        let resultItem: TResultItem;
+        let valueOfElement: TItem;
+
+        for (let indexInArray = 0; indexInArray < this.length; indexInArray++) {
+            valueOfElement = this[indexInArray];
+
+            if (secondItems.length >= indexInArray + 1) {
+                resultItem = resultSelectorFunc(valueOfElement, secondItems[indexInArray]);
+                result.push(resultItem);
+            }
+            else {
+                break;
+            }
+        }
+
+        return result;
+    };
 }
