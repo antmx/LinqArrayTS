@@ -142,6 +142,22 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
+     * Appends a value to the end of the sequence.
+     * @param element The value to append to the sequence.
+     * @returns A new sequence that ends with `element`.
+     */
+    append(
+        element: TItem
+    ): LinqArray<TItem> {
+
+        let items = this.clone();
+
+        items.push(element);
+
+        return items;
+    };
+
+    /**
      * Computes the average of a sequence of numeric values.
      * @param selectorFunc An optional transform function to apply to each element. 
      * @returns The average of the sequence of values.
