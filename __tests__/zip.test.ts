@@ -13,7 +13,7 @@ describe('zip', () => {
         _words = ["one", "two", "three"];
     });
 
-    it("Merges two lists by using the specified result selector function.", function () {
+    test("Merges two lists by using the specified result selector function.", function () {
 
         let numbers = new LinqArray(_numbers);
         let words = new LinqArray(_words);

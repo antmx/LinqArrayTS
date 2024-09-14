@@ -439,11 +439,61 @@ export default class LinqArray<TItem> extends Array<TItem> {
     };
 
     /**
+     * Correlates the elements of two sequences based on matching keys. An optional equality comparer function can be used to compare keys.
+     * @template TInner The type of the elements in the second sequence.
+     * @template TKey The type of the keys returned by the key selector functions.
+     * @template TResultItem The type of the result elements.
+     * @param inner The second sequence to join to the first sequence.
+     * @param outerKeySelector A function to extract the join key from each element of the first sequence.
+     * @param innerKeySelector A function to extract the join key from each element of the second sequence.
+     * @param resultSelector A function to create a result element from two matching elements.
+     * @param keyComparerFunc An optional equality comparer function to compare keys; if not specified, default key value comparison is performed.
+     * @returns A LinqArray<TResultItem> that has elements obtained by performing an inner join on two sequences.
+     */
+    join2<TInner, TKey, TResult>(
+        inner: LinqArray<TInner>,
+        outerKeySelector: (item: TItem) => TKey,
+        innerKeySelector: (item: TInner) => TKey,
+        resultSelector: (first: TItem, second: TInner) => TResult,
+        keyComparerFunc?: (first: TKey, second: TKey) => boolean
+    ): LinqArray<TResult> {
+
+        let result = new LinqArray<TResult>();
+
+        if (keyComparerFunc == undefined) {
+            keyComparerFunc = (first: TKey, second: TKey) => first == second;
+        };
+
+        let outerKey: TKey;
+        let innerKey: TKey;
+
+        this.forEach((valOuter, idxOuter) => {
+
+            outerKey = outerKeySelector(valOuter);
+
+            inner.forEach((valInner, idxInner) => {
+
+                innerKey = innerKeySelector(valInner);
+
+                if (keyComparerFunc(outerKey, innerKey)) {
+
+                    let resultItem = resultSelector(valOuter, valInner);
+                    result.push(resultItem);
+                }
+            });
+        });
+
+        return result;
+    };
+
+    /**
      * Returns the last element of a sequence that satisfies an optional specified condition.
      * @param predicateFunc An optional function to test each element for a condition.
      * @returns The last element in the sequence that optionally passes the test in the specified optional predicate function.
      */
-    last(predicateFunc?: (itm: TItem) => boolean) {
+    last(
+        predicateFunc?: (itm: TItem) => boolean
+    ): TItem {
 
         if (predicateFunc === undefined) {
 
@@ -843,7 +893,9 @@ export default class LinqArray<TItem> extends Array<TItem> {
      * 3) The number of items to return from the end (e.g. [3, -1] returns the last three items).
      * @returns A new `LinqArray<TItem>` that contains the specified range of elements from the source sequence.
      */
-    take(range: number | number[]) {
+    take(
+        range: number | number[]
+    ): LinqArray<TItem> {
 
         let results = new LinqArray<TItem>();
         let actualStartIdx: number = 0;

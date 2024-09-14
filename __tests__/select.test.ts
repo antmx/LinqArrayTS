@@ -15,7 +15,7 @@ describe('select', () => {
         ];
     });
 
-    it("Projects each item into a new form", function () {
+    test("Projects each item into a new form", function () {
 
         let items = new LinqArray(_items); // items is of type LinqArray<number>
         let result = items.select(u => u.name);
@@ -30,7 +30,7 @@ describe('select', () => {
         });
     });
 
-    it("Projects each item into a new form, by incorporating the element's index", function () {
+    test("Projects each item into a new form, by incorporating the element's index", function () {
 
         let items = new LinqArray(_items); // items is of type LinqArray<number>
         let result = items.select((u, i) => u.name + i);
