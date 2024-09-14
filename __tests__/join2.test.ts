@@ -27,7 +27,7 @@ describe('join2', () => {
         ];
     });
 
-    test("Joins two collections based on default key value comparison", () => {
+    test("Joins two collections using default key comparison", () => {
 
         let owners = new LinqArray(_owners);
         let pets = new LinqArray(_pets);
@@ -48,7 +48,7 @@ describe('join2', () => {
         expect(result).toEqual(expected);
     });
 
-    test("Joins two collections based on custom key value comparison", () => {
+    test("Joins two collections using custom key comparison", () => {
 
         let owners = new LinqArray(_owners);
         let pets = new LinqArray(_pets);
