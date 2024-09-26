@@ -9,6 +9,8 @@ describe('chunk', () => {
     beforeEach(() => {
     });
 
+    it.todo('Should use generator function to return chunked data')
+
     // test("Returns an iterator", () => {
 
     //     let items = new LinqArray([2, 4, 6, 8]);
@@ -33,7 +35,6 @@ describe('chunk', () => {
         log(iterator.next()); // { value: 3, done: false }
         log(iterator.next()); // { value: undefined, done: true }
 
-        //test.todo("Try out");
         expect(true).toBeTruthy();
     });
 
