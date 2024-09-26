@@ -185,32 +185,40 @@ export default class LinqArray<TItem> extends Array<TItem> {
     /**
      * Splits the elements of a sequence into chunks of size at most `size`.
      * @param size The maximum size of each chunk.
+     * @returns Because this is a generator function, it returns an iterable collection of `LinqArray<TItem>`s, which can be iterated over in a for..of loop.
      */
     *chunk(
         size: number
     ): IterableIterator<LinqArray<TItem>> {
 
-        // TODO: look into using generator functions for this.
-
-        // const data: number[] = Array.from(
-        //     { length: 1000000 },
-        //     (_, index) => index + 1
-        // );
-
-        //let range = this.take()
-
-        // for (const item of this) {
-        //     yield item;
-        // }
-
+        let count = 0;
         let chunkItems = new LinqArray<TItem>();
+        const iterator = this[Symbol.iterator]();
+        
+        while (true) {
 
-        for (const item in this.getGenerator()) {
+            count++;
+            let current = iterator.next();
 
-            //chunkItems.push(item);
+            if (!current.done) {
+                chunkItems.push(current.value);
+
+                if (count == size) {
+                    count = 0;
+                    yield chunkItems;
+                    chunkItems = new LinqArray<TItem>();
+                }
+            }
+            else {
+                if (chunkItems.length == 0) {
+                    break;
+                }
+
+                yield chunkItems;
+                chunkItems = new LinqArray<TItem>();
+                break;
+            }
         }
-
-
     };
 
     //*getGenerator(): Generator<number, void, number> {
@@ -221,18 +229,18 @@ export default class LinqArray<TItem> extends Array<TItem> {
      */
     *getGenerator(): Generator<TItem, void, TItem> {
 
-        const data = Array.from(
-            { length: 1000000 },
-            (_, index) => index + 1
-        );
+        // const data = Array.from(
+        //     { length: 1000000 },
+        //     (_, index) => index + 1
+        // );
 
-        for (const item of data) {
-            yield item;
-        }
-
-        // for (const item of this) {
+        // for (const item:TItem of data) {
         //     yield item;
         // }
+
+        for (const item of this) {
+            yield item;
+        }
     };
 
     /**
@@ -456,7 +464,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
             key: TKey,
             items: LinqArray<TResultItem>
         }>;
-        
+
         if (this.length === 0) {
             return groups;
         }

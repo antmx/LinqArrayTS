@@ -3,61 +3,42 @@ import { describe, expect, test } from "@jest/globals";
 import LinqArray from "../src/LinqArray";
 import { log, error } from "console";
 
-// TODO: look into using generator functions for this.
 describe('chunk', () => {
 
     beforeEach(() => {
     });
 
-    it.todo('Should use generator function to return chunked data')
+    const cases = [
+        { arraySize: 10, chunkSize: 10, chunkQty: 1 },
+        { arraySize: 40, chunkSize: 10, chunkQty: 4 },
+        { arraySize: 35, chunkSize: 10, chunkQty: 4 },
+        { arraySize: 0, chunkSize: 10, chunkQty: 0 },
+        { arraySize: 0, chunkSize: 0, chunkQty: 0 }
+    ];
 
-    // test("Returns an iterator", () => {
+    test.each(cases)(
+        "given %p as arguments, returns expected values",
+        (currentCase: { arraySize: number; chunkSize: number; chunkQty: number; }) => {
 
-    //     let items = new LinqArray([2, 4, 6, 8]);
-    //     let result = items.append(10);
-    //     let expectedLength = items.length + 1;
+            let data = [...Array(currentCase.arraySize).keys()];
+            let items = new LinqArray(data);
+            let size = currentCase.chunkSize;
+            let chunkCount = 0;
 
-    //     expect(result.length).toEqual(expectedLength);
-    // });
+            for (const chunk of items.chunk(size)) {
 
-    test("simple iterator", () => {
+                chunkCount++;
 
-        function* simpleGenerator() {
-            yield 1;
-            yield 2;
-            yield 3;
-        }
-
-        const iterator = simpleGenerator();
-
-        log(iterator.next()); // { value: 1, done: false }
-        log(iterator.next()); // { value: 2, done: false }
-        log(iterator.next()); // { value: 3, done: false }
-        log(iterator.next()); // { value: undefined, done: true }
-
-        expect(true).toBeTruthy();
-    });
-
-    test("Fibonacci iterator", () => {
-
-        function* createFibonacciGenerator() {
-            let a = 0;
-            let b = 1;
-            while (true) {
-                yield a;
-                [a, b] = [b, a + b];
+                if (chunk.length > 0 && (chunk.length % size) == 0) {
+                    expect(chunk.length).toEqual(size);
+                }
+                else {
+                    let expectedFinalChunkSize = items.length % size;
+                    expect(chunk.count()).toEqual(expectedFinalChunkSize);
+                }
             }
+
+            expect(chunkCount).toEqual(currentCase.chunkQty);
         }
-
-        debugger;
-        const iterator = createFibonacciGenerator();
-        log(typeof iterator);
-
-        for (let count = 1; count <= 10; count++) {
-            let current = iterator.next();
-
-            log(current.value);
-        }
-
-    });
+    );
 });
