@@ -194,7 +194,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         let count = 0;
         let chunkItems = new LinqArray<TItem>();
         const iterator = this[Symbol.iterator]();
-        
+
         while (true) {
 
             count++;
@@ -210,36 +210,12 @@ export default class LinqArray<TItem> extends Array<TItem> {
                 }
             }
             else {
-                if (chunkItems.length == 0) {
-                    break;
+                if (chunkItems.length > 0) {
+                    yield chunkItems;
                 }
 
-                yield chunkItems;
-                chunkItems = new LinqArray<TItem>();
-                break;
+                break;                
             }
-        }
-    };
-
-    //*getGenerator(): Generator<number, void, number> {
-
-    /**
-     * 
-     * @template TResultItem The type of the elements of the result sequence.
-     */
-    *getGenerator(): Generator<TItem, void, TItem> {
-
-        // const data = Array.from(
-        //     { length: 1000000 },
-        //     (_, index) => index + 1
-        // );
-
-        // for (const item:TItem of data) {
-        //     yield item;
-        // }
-
-        for (const item of this) {
-            yield item;
         }
     };
 
