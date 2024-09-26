@@ -183,8 +183,61 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
+     * Splits the elements of a sequence into chunks of size at most `size`.
+     * @param size The maximum size of each chunk.
+     */
+    *chunk(
+        size: number
+    ): IterableIterator<LinqArray<TItem>> {
+
+        // TODO: look into using generator functions for this.
+
+        // const data: number[] = Array.from(
+        //     { length: 1000000 },
+        //     (_, index) => index + 1
+        // );
+
+        //let range = this.take()
+
+        // for (const item of this) {
+        //     yield item;
+        // }
+
+        let chunkItems = new LinqArray<TItem>();
+
+        for (const item in this.getGenerator()) {
+
+            //chunkItems.push(item);
+        }
+
+
+    };
+
+    //*getGenerator(): Generator<number, void, number> {
+
+    /**
+     * 
+     * @template TResultItem The type of the elements of the result sequence.
+     */
+    *getGenerator(): Generator<TItem, void, TItem> {
+
+        const data = Array.from(
+            { length: 1000000 },
+            (_, index) => index + 1
+        );
+
+        for (const item of data) {
+            yield item;
+        }
+
+        // for (const item of this) {
+        //     yield item;
+        // }
+    };
+
+    /**
      * Creates a shallow copy of the `LinqArray`.
-     * @returns A new LinqArray containing the source array's items.
+     * @returns A generator object new LinqArray containing the source array's items.
      */
     clone(): LinqArray<TItem> {
 
@@ -390,6 +443,8 @@ export default class LinqArray<TItem> extends Array<TItem> {
     /**
      * Groups the elements of a sequence according to a specified key selector function.
      * @param keySelectorFunc A function to extract the key for each element.
+     * @template TKey The type of the group keys.
+     * @template TResultItem The type of the group items.
      * @returns A LinqArray<{TKey, TResultItem}> of groups, where each group object contains a key and a collection of objects.
      */
     groupBy<TKey, TResultItem>(
@@ -397,8 +452,11 @@ export default class LinqArray<TItem> extends Array<TItem> {
         elementSelectorFunc: (itm: TItem) => TResultItem
     ): LinqArray<{ key: TKey, items: LinqArray<TResultItem> }> {
 
-        let groups = new LinqArray<{ key: TKey, items: LinqArray<TResultItem> }>;
-
+        let groups = new LinqArray<{
+            key: TKey,
+            items: LinqArray<TResultItem>
+        }>;
+        
         if (this.length === 0) {
             return groups;
         }
