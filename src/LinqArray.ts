@@ -214,7 +214,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
                     yield chunkItems;
                 }
 
-                break;                
+                break;
             }
         }
     };
@@ -292,6 +292,25 @@ export default class LinqArray<TItem> extends Array<TItem> {
 
         return this.length;
     };
+
+    /**
+     * Returns the elements of an IEnumerable<T>, or a default valued singleton collection if the sequence is empty.
+     * @param defaultValue The value to return if the sequence is empty.
+     * @returns A LinqArray<TItem> that contains `defaultValue` if source is empty; otherwise, source array.
+     */
+    defaultIfEmpty(
+        defaultValue: TItem
+    ): LinqArray<TItem> {
+
+        if (this.length > 0) {
+            return this;
+        }
+
+        let resultItems = new LinqArray<TItem>();
+        resultItems.push(defaultValue);
+
+        return resultItems;
+    }
 
     /**
      * Returns distinct elements from a sequence by using the default equality comparer to compare values, or an optional custom comparer.

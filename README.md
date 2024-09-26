@@ -30,7 +30,7 @@ LinqArray includes equivalents of these common .NET LINQ, Generic and Array meth
 - [concat](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.concat)
 - [contains](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.contains)
 - [count](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.count)
-- [defaultIfEmpty](https://learn.microsoft.com/en-us/dotnet/api/system.linq.defaultIfEmpty.[defaultIfEmpty) TODO
+- [defaultIfEmpty](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.defaultifempty)
 - [distinct](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.distinct)
 - [distinctBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.distinctBy) TODO
 - [elementAt](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.elementAt)

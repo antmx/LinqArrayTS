@@ -4,7 +4,7 @@ import LinqArray from "../src/LinqArray";
 
 describe('contains', () => {
 
-    let _items;
+    let _items: number[];
 
     beforeEach(function () {
 
