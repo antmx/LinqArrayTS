@@ -294,9 +294,9 @@ export default class LinqArray<TItem> extends Array<TItem> {
     };
 
     /**
-     * Returns the elements of an IEnumerable<T>, or a default valued singleton collection if the sequence is empty.
+     * Returns the elements of a `LinqArray<TItem>`, or a default valued singleton collection if the sequence is empty.
      * @param defaultValue The value to return if the sequence is empty.
-     * @returns A LinqArray<TItem> that contains `defaultValue` if source is empty; otherwise, source array.
+     * @returns A `LinqArray<TItem>` that contains `defaultValue` if source is empty; otherwise, the source sequence.
      */
     defaultIfEmpty(
         defaultValue: TItem
@@ -327,6 +327,40 @@ export default class LinqArray<TItem> extends Array<TItem> {
         self.forEach((valueOfElement, indexInArray) => {
 
             if (!results.contains(valueOfElement, comparerFunc)) {
+                results.push(valueOfElement);
+            }
+        });
+
+        return results;
+    };
+
+    /**
+     * Returns distinct elements from a sequence according to a specified key selector function and using an optional comparer function to compare keys.
+     * @param keySelectorFunc A function to extract the key for each element.
+     * @param comparerFunc An optional equality comparer function to compare keys.
+     * @returns A new `LinqArray<TItem>` that contains distinct elements from the source sequence.
+     */
+    distinctBy<TKey>(
+        keySelectorFunc: (item: TItem) => TKey,
+        comparerFunc?: (first: TKey, second: TKey) => boolean
+    ): LinqArray<TItem> {
+
+        let self = this;
+        let results = new LinqArray<TItem>();
+        //let key: TKey;
+
+        if (comparerFunc == undefined) {
+            comparerFunc = (first: TKey, second: TKey) => first == second;
+        };
+
+        let keyComparerFunc = (first: TItem, second: TItem) =>
+            comparerFunc(keySelectorFunc(first), keySelectorFunc(second));
+
+        self.forEach((valueOfElement, indexInArray) => {
+
+            //key = keySelectorFunc(valueOfElement);
+
+            if (!results.contains(valueOfElement, keyComparerFunc)) {
                 results.push(valueOfElement);
             }
         });

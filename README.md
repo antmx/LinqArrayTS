@@ -32,7 +32,7 @@ LinqArray includes equivalents of these common .NET LINQ, Generic and Array meth
 - [count](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.count)
 - [defaultIfEmpty](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.defaultifempty)
 - [distinct](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.distinct)
-- [distinctBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.distinctBy) TODO
+- [distinctBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.distinctBy)
 - [elementAt](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.elementAt)
 - [elementAtOrDefault](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.elementAtOrDefault) TODO
 - [empty](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.empty) TODO
