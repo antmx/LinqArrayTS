@@ -385,6 +385,24 @@ export default class LinqArray<TItem> extends Array<TItem> {
     };
 
     /**
+     * Returns the element at a specified index in a sequence or a default value if the index is out of range.
+     * @param index The index from the beginning of the sequence of the element to retrieve.
+     * @param defaultValue The value to return if no item exists at the specified index.
+     * @returns The element at the specified position in the sequence, or `defaultValue` if `index` is out of range.
+     */
+    elementAtOrDefault(
+        index: number,
+        defaultValue: TItem
+    ): TItem {
+
+        if (this.length > index) {
+            return this[index];
+        }
+
+        return defaultValue;
+    };
+
+    /**
      * Produces the set difference of two sequences by using either the default equality comparer, or an optional custom equality comparer, to compare values.
      * @param secondItems A LinqArray<TItem> whose elements that also occur in the current sequence will cause those elements to be removed from the returned sequence.
      * @param comparerFunc An optional custom equality comparer to compare values.
