@@ -403,6 +403,15 @@ export default class LinqArray<TItem> extends Array<TItem> {
     };
 
     /**
+     * Returns an empty LinqArray<T> that has the specified type argument.
+     * @returns An empty LinqArray<T> whose type argument is `TItem`.
+     */
+    empty(): LinqArray<TItem> {
+
+        return new LinqArray<TItem>();
+    }
+
+    /**
      * Produces the set difference of two sequences by using either the default equality comparer, or an optional custom equality comparer, to compare values.
      * @param secondItems A LinqArray<TItem> whose elements that also occur in the current sequence will cause those elements to be removed from the returned sequence.
      * @param comparerFunc An optional custom equality comparer to compare values.

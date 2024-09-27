@@ -35,7 +35,7 @@ LinqArray includes equivalents of these common .NET LINQ, Generic and Array meth
 - [distinctBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.distinctBy)
 - [elementAt](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.elementAt)
 - [elementAtOrDefault](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.elementAtOrDefault)
-- [empty](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.empty) TODO
+- [empty](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.empty)
 - [except](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.except)
 - [exceptBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.exceptBy) TODO
 - [first](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.first)
