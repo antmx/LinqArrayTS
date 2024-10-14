@@ -15,15 +15,7 @@ describe("where", () => {
 	test("Correctly filters a sequence of values based on a predicate", () => {
 
 		let items = new LinqArray(_items); // items is of type LinqArray<number>
-
-		let whereResult = items.where((current) => {
-			if (current % 2 === 0) {
-				return true;
-			}
-
-			return false;
-		}); // whereResult is of type LinqArray<number>
-
+		let whereResult = items.where(current => current % 2 === 0); // whereResult is of type LinqArray<number>
 		let expected = [0, 30, 20, 90, 40];
 
 		expect(whereResult).toEqual(expected);

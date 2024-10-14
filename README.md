@@ -1,19 +1,21 @@
 # TypeScript LinqArray&lt;T&gt;
+
 ## A TypeScript generic array that supports .NET Language Integrated Query (LINQ) operations
 
 TypeScript code example
+
 ```typescript
-import LinqArray from '../src/LinqArray';
+import LinqArray from "../src/LinqArray";
 
 let jsItems = [2, 4, 6, 8, 1, 3, 5, 7]; // Standard JS array of numbers
 let items1 = new LinqArray<number>(jsItems); // items is of type LinqArray<number>, constructed from the standard JS array of numbers
 let items2 = new LinqArray(jsItems); // Simplified constructor where generic type (number) is inferred from the source array
 
 let firstOver4Times10 = items2
-    .where(i => i > 4)      // items > 4
-    .select(i => i * 10)    // multiply by 10
-    .orderBy(i => i)        // order ascending
-    .first();               // first item
+  .where((i) => i > 4) // items > 4
+  .select((i) => i * 10) // multiply by 10
+  .orderBy((i) => i) // order ascending
+  .first(); // first item
 
 let expected = 50;
 
@@ -21,6 +23,7 @@ expect(firstOver4Times10).toEqual(expected);
 ```
 
 LinqArray includes equivalents of these common .NET LINQ, Generic and Array methods:
+
 - [aggregate](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.aggregate)
 - [all](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.all)
 - [any](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.any)
@@ -37,7 +40,7 @@ LinqArray includes equivalents of these common .NET LINQ, Generic and Array meth
 - [elementAtOrDefault](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.elementAtOrDefault)
 - [empty](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.empty)
 - [except](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.except)
-- [exceptBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.exceptBy) TODO
+- [exceptBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.exceptBy)
 - [first](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.first)
 - [firstOrDefault](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.firstOrDefault)
 - [groupBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.groupBy)

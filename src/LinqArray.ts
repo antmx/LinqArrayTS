@@ -445,6 +445,43 @@ export default class LinqArray<TItem> extends Array<TItem> {
     };
 
     /**
+     * Produces the set difference of two sequences according to a specified key selector function.
+     * @param secondItems A LinqArray<TItem> whose keys that also occur in the first sequence will cause those elements to be removed from the returned sequence.
+     * @param keySelectorFunc A function to extract the key for each element.
+     * @param keyComparerFunc The equality comparer function to compare key values.
+     * @returns A sequence that contains the set difference of the elements of two sequences.
+     */
+    exceptBy<TKey>(
+        secondItems: LinqArray<TItem>,
+        keySelectorFunc: (itm: TItem) => TKey,
+        keyComparerFunc?: (first: TKey, second: TKey) => boolean
+    ): LinqArray<TItem> {
+
+        let results = new LinqArray<TItem>();
+
+        if (secondItems == undefined) {
+            throw new Error("ArgumentNull 'secondItems'");
+        }
+
+        let keys = secondItems.select(keySelectorFunc);
+        let key: TKey;
+
+        this.forEach((valueOfElement, indexInArray) => {
+
+            key = keySelectorFunc(valueOfElement);
+
+            if (keys.contains(key, keyComparerFunc)) {
+                return;
+            }
+
+            keys.push(key);
+            results.push(valueOfElement);
+        })
+
+        return results;
+    };
+
+    /**
      * Returns the first element in a sequence that optionally satisfies a specified condition.
      * @param predicateFunc An optional function to test each element for a condition.
      * @returns The first element in the sequence that optionally passes the test in the specified predicate function (if specified).
