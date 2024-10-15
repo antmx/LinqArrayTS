@@ -155,7 +155,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         items.push(element);
 
         return items;
-    };
+    }
 
     /**
      * Computes the average of a sequence of numeric values.
@@ -217,7 +217,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
                 break;
             }
         }
-    };
+    }
 
     /**
      * Creates a shallow copy of the `LinqArray`.
@@ -232,7 +232,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         });
 
         return result;
-    };
+    }
 
     /**
      * Concatenates a second sequence to the current sequence.
@@ -282,7 +282,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         }
 
         return result;
-    };
+    }
 
     /**
      * Returns the number of elements in a sequence.
@@ -291,7 +291,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
     count(): number {
 
         return this.length;
-    };
+    }
 
     /**
      * Returns the elements of a `LinqArray<TItem>`, or a default valued singleton collection if the sequence is empty.
@@ -332,7 +332,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         });
 
         return results;
-    };
+    }
 
     /**
      * Returns distinct elements from a sequence according to a specified key selector function and using an optional comparer function to compare keys.
@@ -351,7 +351,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
 
         if (comparerFunc == undefined) {
             comparerFunc = (first: TKey, second: TKey) => first == second;
-        };
+        }
 
         let keyComparerFunc = (first: TItem, second: TItem) =>
             comparerFunc(keySelectorFunc(first), keySelectorFunc(second));
@@ -366,7 +366,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         });
 
         return results;
-    };
+    }
 
     /**
      * Returns the element at a specified index in a sequence.
@@ -382,7 +382,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         }
 
         return null!;
-    };
+    }
 
     /**
      * Returns the element at a specified index in a sequence or a default value if the index is out of range.
@@ -400,7 +400,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         }
 
         return defaultValue;
-    };
+    }
 
     /**
      * Returns an empty LinqArray<T> that has the specified type argument.
@@ -442,7 +442,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         });
 
         return results;
-    };
+    }
 
     /**
      * Produces the set difference of two sequences according to a specified key selector function.
@@ -479,7 +479,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         })
 
         return results;
-    };
+    }
 
     /**
      * Returns the first element in a sequence that optionally satisfies a specified condition.
@@ -510,7 +510,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         }
 
         throw new Error("NoMatchingElements");
-    };
+    }
 
     /**
      * Returns the first element of a sequence, or a default value if no element is found.
@@ -539,7 +539,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         }
 
         return defaultValue;
-    };
+    }
 
     /**
      * Groups the elements of a sequence according to a specified key selector function.
@@ -588,7 +588,49 @@ export default class LinqArray<TItem> extends Array<TItem> {
         });
 
         return groups;
-    };
+    }
+
+    /**
+     * Correlates the elements of two sequences based on key equality and groups the results - this works like an outer join, i.e. an item from the source array will always be included in the results, even if there are no correspodning items in the `inner` array.
+     * A optional equality comparer function is used to compare keys.
+     * @param inner The sequence to join to the first sequence.
+     * @param outerKeySelector A function to extract the join key from each element of the first sequence.
+     * @param innerKeySelector A function to extract the join key from each element of the second sequence.
+     * @param resultSelector A function to create a result element from an element from the first sequence and a collection of matching elements from the second sequence.
+     * @param keyComparerFunc An optional equality comparer function to hash and compare keys.
+     * @template TInner The type of the elements of the second sequence.
+     * @template TKey The type of the keys returned by the key selector functions.
+     * @template TResult The type of the result elements.
+     * @returns An `LinqArray<{TResult}>` that contains elements obtained by performing a grouped join on two sequences.
+     */
+    groupJoin<TInner, TKey, TResult>(
+        inner: LinqArray<TInner>,
+        outerKeySelector: (itm: TItem) => TKey,
+        innerKeySelector: (itm: TInner) => TKey,
+        resultSelector: (itm: TItem, inner: LinqArray<TInner>) => TResult,
+        keyComparerFunc?: (first: TKey, second: TKey) => boolean
+    ): LinqArray<TResult> {
+
+        let result = new LinqArray<TResult>();
+
+        if (keyComparerFunc == undefined) {
+            keyComparerFunc = (first: TKey, second: TKey) => first == second;
+        }
+
+        let outerKey: TKey;
+
+        this.forEach((valOuter, idxOuter) => {
+
+            outerKey = outerKeySelector(valOuter);
+
+            let matchingInnerItems: LinqArray<TInner> = inner.where(innerItm => keyComparerFunc(outerKey, innerKeySelector(innerItm)));
+            let resultItem = resultSelector(valOuter, matchingInnerItems);
+
+            result.push(resultItem);
+        });
+
+        return result;
+    }
 
     /**
      * Produces the set intersection of two sequences, using an optional equality comparer method to compare values.
@@ -611,10 +653,11 @@ export default class LinqArray<TItem> extends Array<TItem> {
         });
 
         return results;
-    };
+    }
 
     /**
-     * Correlates the elements of two sequences based on matching keys. An optional equality comparer function can be used to compare keys.
+     * Correlates the elements of two sequences based on matching keys - this works like an inner join, i.e. an item from the source array will only be included in the results if there are correspodning items in the `inner` array.
+     * An optional equality comparer function can be used to compare keys.
      * @template TInner The type of the elements in the second sequence.
      * @template TKey The type of the keys returned by the key selector functions.
      * @template TResultItem The type of the result elements.
@@ -637,7 +680,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
 
         if (keyComparerFunc == undefined) {
             keyComparerFunc = (first: TKey, second: TKey) => first == second;
-        };
+        }
 
         let outerKey: TKey;
         let innerKey: TKey;
@@ -659,7 +702,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         });
 
         return result;
-    };
+    }
 
     /**
      * Returns the last element of a sequence that satisfies an optional specified condition.
@@ -690,7 +733,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         }
 
         throw new Error("NoMatchingElements");
-    };
+    }
 
     /**
      * Returns the maximum value in a generic sequence.
@@ -717,7 +760,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         });
 
         return result;
-    };
+    }
 
     /**
      * Returns the minimum value in a generic sequence.
@@ -744,7 +787,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         });
 
         return result;
-    };
+    }
 
     /**
      * Sorts the elements of a sequence in ascending order, using an optional custom comparer function.
@@ -787,7 +830,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         items.sort(compareFn);
 
         return items;
-    };
+    }
 
     /**
      * Sorts the elements of a sequence in descending order, optionally using a custom comparer function.
@@ -803,7 +846,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         let results = this.orderBy(keySelectorFunc, comparerFunc).reverse2();
 
         return results;
-    };
+    }
 
     /**
      * Creates a new `LinqArray<TItem>` containing the items of the source array in reverse order.
@@ -814,7 +857,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         let result = new LinqArray(resultItems);
 
         return result;
-    };
+    }
 
     /**
      * Projects each element of a sequence into a new form, optionally incorporating the element's index.
@@ -869,7 +912,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         });
 
         return results;
-    };
+    }
 
     /**
      * Sets the specified element in the current Array to the specified value.
@@ -901,7 +944,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         }
 
         currentDimensionArray[currentIndex] = value;
-    };
+    }
 
     /**
      * Returns the only element of a sequence that satisfies an optional specified condition, and throws an exception if more than one such element exists.
@@ -940,7 +983,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         }
 
         throw new Error("MoreThanOneMatchingElements");
-    };
+    }
 
     /**
      * Returns a single, specific element of a sequence, that optionally satisfies an optional condition, or a default value if that element is not found.
@@ -981,7 +1024,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         }
 
         throw new Error("MoreThanOneMatchingElements");
-    };
+    }
 
     /**
      * Bypasses a specified number of elements in a sequence and then returns the remaining elements.
@@ -1004,7 +1047,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         });
 
         return results;
-    };
+    }
 
     /**
      * Bypasses elements in a sequence as long as a specified condition is true and then returns the remaining elements. The element's index can be used in the logic of the predicate function.
@@ -1030,7 +1073,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         });
 
         return results;
-    };
+    }
 
     /** Computes the sum of the sequence of numeric values that are obtained by invoking a transform function on each element of the input sequence.
     * @param transformFunc Optional function that transforms, or selects a property of, the items before summing them.
@@ -1058,7 +1101,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         });
 
         return total;
-    };
+    }
 
     /**
      * Returns a specified range of contiguous elements from a sequence.
@@ -1104,7 +1147,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         });
 
         return results;
-    };
+    }
 
     /**
      * Returns elements from a sequence as long as a specified condition is true. The element's index can be used in the logic of the predicate function.
@@ -1129,7 +1172,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         }
 
         return results;
-    };
+    }
 
     /**
      * Produces the set union of two sequences, i.e. only items that exist in both sequences, using an optional equality comparer function.
@@ -1157,7 +1200,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
         });
 
         return results;
-    };
+    }
 
     /**
      * Filters a sequence of values based on a predicate.
@@ -1217,5 +1260,5 @@ export default class LinqArray<TItem> extends Array<TItem> {
         }
 
         return result;
-    };
+    }
 }
