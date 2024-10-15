@@ -766,6 +766,39 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
+     * Returns the last element of a sequence that satisfies an optional condition, or a specified default value if no such element is found.
+     * @param defaultValue
+     * @param predicateFunc An optional function to test each element for a condition.
+     * @returns `defaultValue` if the sequence is empty or if no elements pass the test in the optional predicate function; otherwise, the last element that passes the test in the predicate function, if specified.
+     */
+    lastOrDefault(
+        defaultValue: TItem,
+        predicateFunc?: (itm: TItem) => boolean
+    ): TItem {
+
+        if (predicateFunc === undefined) {
+
+            if (this.length == 0) {
+                return defaultValue;
+            }
+
+            return this[this.length - 1];
+        }
+
+        let item: TItem;
+
+        for (let idx: number = this.length - 1; idx >= 0; idx--) {
+            item = this[idx];
+
+            if (predicateFunc(item)) {
+                return item;
+            }
+        }
+
+        return defaultValue;
+    }
+
+    /**
      * Returns the maximum value in a generic sequence.
      * @param comparerFunc An optional comparer function to compare values.
      * @returns The maximum value in the sequence.
