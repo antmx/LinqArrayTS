@@ -656,6 +656,36 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
+     * Produces the set intersection of two sequences according to a specified key selector function.
+     * @param secondItems A `LinqArray<TKey>` whose distinct elements that also appear in the first sequence will be returned.
+     * @param keySelectorFunc A function to extract the key for each element.
+     * @param keyComparerFunc An optional equality comparer function to compare keys.
+     * @returns A sequence that contains the elements that form the set intersection of two sequences.
+     */
+    intersectBy<TKey>(
+        secondItems: LinqArray<TKey>,
+        keySelectorFunc: (itm: TItem) => TKey,
+        keyComparerFunc?: (first: TKey, second: TKey) => boolean
+    ): LinqArray<TItem> {
+
+        // var valuetoupdate = mappeddata.IntersectBy(
+        //      users.Select(y => y.UserId),        // secondItems
+        //      y => y.UserId,                      // keySelectorFunc
+        //      StringComparer.OrdinalIgnoreCase);  // keyComparerFunc
+
+        let results = new LinqArray<TItem>();
+
+        this.distinct().forEach((valueOfElement, indexInArray) => {
+
+            if (secondItems.contains(keySelectorFunc(valueOfElement), keyComparerFunc)) {
+                results.push(valueOfElement);
+            }
+        });
+
+        return results;
+    }
+
+    /**
      * Correlates the elements of two sequences based on matching keys - this works like an inner join, i.e. an item from the source array will only be included in the results if there are correspodning items in the `inner` array.
      * An optional equality comparer function can be used to compare keys.
      * @template TInner The type of the elements in the second sequence.
