@@ -285,12 +285,19 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
-     * Returns the number of elements in a sequence.
-     * @returns The number of elements in the sequence.
+     * Returns a number that represents how many elements in the specified sequence satisfy an optional condition.
+     * @param predicateFunc An optional function to test each element for a condition.
+     * @returns A number that represents how many elements in the sequence satisfy the condition in the predicate function.
      */
-    count(): number {
+    count(
+        predicateFunc?: (itm: TItem) => boolean
+    ): number {
 
-        return this.length;
+        if (predicateFunc == undefined) {
+            return this.length;
+        }
+
+        return this.where(predicateFunc).length;
     }
 
     /**

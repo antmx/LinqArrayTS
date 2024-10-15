@@ -13,7 +13,7 @@ describe('count', () => {
 
     test("Returns the number of items in the list", () => {
 
-        let items = new LinqArray(_items); // items is of type LinqArray<number>
+        let items = new LinqArray(_items);
 
         let result = items.count();
 
@@ -22,11 +22,20 @@ describe('count', () => {
 
     test("Returns zero when the list is empty", () => {
 
-        let items = new LinqArray<number>(); // items is of type LinqArray<{ name: string, age: number }>
+        let items = new LinqArray<number>();
 
         let result = items.count();
 
         expect(result).toEqual(0);
+    });
+
+    test("Returns the number of items in the list that satisfy a condition", () => {
+
+        let items = new LinqArray(_items);
+
+        let result = items.count(i => i > 1);
+
+        expect(result).toEqual(2);
     });
 
 });

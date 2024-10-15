@@ -13,7 +13,7 @@ describe('contains', () => {
 
     test("Returns true when list does contain value", () => {
 
-        let items = new LinqArray(_items); // items is of type LinqArray<number>
+        let items = new LinqArray(_items);
 
         let result = items.contains(2);
 
@@ -28,7 +28,7 @@ describe('contains', () => {
             { "name": "Freddie", "age": 60 }
         ];
 
-        let items = new LinqArray(users); // items is of type LinqArray<{ name: string, age: number }>
+        let items = new LinqArray(users);
 
         let result = items.contains(
             { "name": "rod", "age": 10 },
