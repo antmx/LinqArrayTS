@@ -890,6 +890,36 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
+     * Returns the minimum value in a sequence according to a specified key selector function and key comparer function.
+     * @param keySelectorFunc A function to extract the key for each element.
+     * @param keyComparerFunc An optional comparer function to compare keys.
+     * @template TKey The type of key to compare elements by.
+     * @returns The value with the minimum key in the sequence.
+     */
+    minBy<TKey>(
+        keySelectorFunc: (itm: TItem) => TKey,
+        keyComparerFunc?: (first: TKey, second: TKey) => boolean
+    ): TItem {
+
+        if (keyComparerFunc == undefined) {
+            keyComparerFunc = (first: TKey, second: TKey) => {
+                return first < second
+            };
+        }
+
+        let result: TItem = null!;
+
+        this.forEach((valueOfElement, indexInArray) => {
+
+            if (!result || keyComparerFunc(keySelectorFunc(valueOfElement), keySelectorFunc(result))) {
+                result = valueOfElement;
+            }
+        });
+
+        return result;
+    }
+
+    /**
      * Sorts the elements of a sequence in ascending order, using an optional custom comparer function.
      * @param keySelectorFunc A function to extract the key for each element.
      * @param comparerFunc An optional equality comparer to compare values.

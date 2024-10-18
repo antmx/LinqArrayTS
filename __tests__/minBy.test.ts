@@ -2,7 +2,7 @@
 import { describe, expect, test } from "@jest/globals";
 import LinqArray from "../src/LinqArray";
 
-describe('maxBy', () => {
+describe('minBy', () => {
 
     let _items: { name: string, age: number }[];
 
@@ -16,25 +16,25 @@ describe('maxBy', () => {
         ];
     });
 
-    test("Returns the eldest person", () => {
+    test("Returns the youngest person", () => {
 
         let items = new LinqArray(_items);
-        let result = items.maxBy(p => p.age);
-        let expected = { name: "Anthony", age: 50 };
+        let result = items.minBy(p => p.age);
+        let expected = { name: "Isla", age: 14 };
 
         expect(result).toEqual(expected);
     });
 
-    test("Returns the eldest child using a custom comparer function", () => {
+    test("Returns the youngest adult using a custom comparer function", () => {
 
         let items = new LinqArray(_items);
 
-        let result = items.maxBy(
+        let result = items.minBy(
             p => p.age,
-            (first, second) => first > second || first < 18 && second >= 18 // ignore adults
+            (first, second) => first >= 18 && first < second // ignore children
         );
 
-        let expected = { name: "Lauren", age: 17 };
+        let expected = { name: "Angie", age: 46 };
 
         expect(result).toEqual(expected);
     });
