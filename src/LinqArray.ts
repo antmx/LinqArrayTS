@@ -287,7 +287,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
     /**
      * Returns a number that represents how many elements in the specified sequence satisfy an optional condition.
      * @param predicateFunc An optional function to test each element for a condition.
-     * @returns A number that represents how many elements in the sequence satisfy the condition in the predicate function.
+     * @returns A number that represents how many elements in the sequence and that optionally satisfy the condition in the optional predicate function.
      */
     count(
         predicateFunc?: (itm: TItem) => boolean
@@ -825,6 +825,29 @@ export default class LinqArray<TItem> extends Array<TItem> {
         this.forEach((valueOfElement, indexInArray) => {
 
             if (!result || comparerFunc(valueOfElement, result)) {
+                result = valueOfElement;
+            }
+        });
+
+        return result;
+    }
+
+    maxBy<TKey>(
+        keySelectorFunc: (itm: TItem) => TKey,
+        keyComparerFunc?: (first: TKey, second: TKey) => boolean
+    ): TItem {
+
+        if (keyComparerFunc == undefined) {
+            keyComparerFunc = (first: TKey, second: TKey) => {
+                return first > second
+            };
+        }
+
+        let result: TItem = null!;
+
+        this.forEach((valueOfElement, indexInArray) => {
+
+            if (!result || keyComparerFunc(keySelectorFunc(valueOfElement), keySelectorFunc(result))) {
                 result = valueOfElement;
             }
         });

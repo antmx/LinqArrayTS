@@ -23,7 +23,7 @@ describe('chunk', () => {
         "Given %p as arguments, returns the expected number of chunks, each with the correct values",
         (currentCase: { arraySize: number; chunkSize: number; chunkQty: number; }) => {
 
-            let data = [...Array(currentCase.arraySize).keys()];
+            let data = [...Array(currentCase.arraySize).keys()]; // an array of numbers e.g. [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             let items = new LinqArray(data);
             let size = currentCase.chunkSize;
             let chunkCount = 0;
