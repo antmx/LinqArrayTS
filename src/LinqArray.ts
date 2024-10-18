@@ -832,6 +832,13 @@ export default class LinqArray<TItem> extends Array<TItem> {
         return result;
     }
 
+    /**
+     * Returns the maximum value in a sequence according to a specified key selector function and key comparer function.
+     * @param keySelectorFunc A function to extract the key for each element.
+     * @param keyComparerFunc An optional comparer function to compare keys.
+     * @template TKey The type of key to compare elements by.
+     * @returns The value with the maximum key in the sequence.
+     */
     maxBy<TKey>(
         keySelectorFunc: (itm: TItem) => TKey,
         keyComparerFunc?: (first: TKey, second: TKey) => boolean
