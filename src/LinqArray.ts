@@ -921,6 +921,45 @@ export default class LinqArray<TItem> extends Array<TItem> {
 
     /**
      * Sorts the elements of a sequence in ascending order, using an optional custom comparer function.
+     * @param comparerFunc An optional equality comparer to compare values.
+     * @returns A `LinqArray<TItem>` whose elements are sorted.
+     */
+    order(
+        comparerFunc?: (first: TItem, second: TItem) => number
+    ): LinqArray<TItem> {
+
+        let items = this.clone();
+
+        let compareFn: (first: TItem, second: TItem) => number
+
+        if (comparerFunc == undefined) {
+            compareFn = (a: TItem, b: TItem) => {
+
+                if (a < b) {
+                    return -1;
+                }
+
+                if (a > b) {
+                    return 1;
+                }
+
+                return 0;
+
+            };
+        } else {
+            compareFn = (a: TItem, b: TItem) => {
+
+                return comparerFunc(a, b);
+            };
+        }
+
+        items.sort(compareFn);
+
+        return items;
+    }
+
+    /**
+     * Sorts the elements of a sequence in ascending order, using an optional custom comparer function.
      * @param keySelectorFunc A function to extract the key for each element.
      * @param comparerFunc An optional equality comparer to compare values.
      * @returns A `LinqArray<TItem>` whose elements are sorted according to a key.

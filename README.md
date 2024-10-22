@@ -54,7 +54,7 @@ LinqArray includes equivalents of these common .NET LINQ, Generic and Array meth
 - [maxBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.maxBy)
 - [min](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.min)
 - [minBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.minBy)
-- [order](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.order) TODO
+- [order](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.order)
 - [orderBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderBy)
 - [orderByDescending](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderByDescending)
 - [orderDescending](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderDescending) TODO
