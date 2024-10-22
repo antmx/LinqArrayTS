@@ -1059,6 +1059,31 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
+     * Generates a sequence of numbers within a specified range.
+     * @param start The value of the first integer in the sequence.
+     * @param count The number of sequential integers to generate.
+     * @returns This is a generator function, so it returns an iterable collection of `number` values in the given range (inclusive), which can be iterated over in a for..of loop.
+     */
+    static *range(
+        start: number,
+        count: number
+    )
+        : IterableIterator<number> {
+
+        if (count < 0) {
+            throw new Error(`CannotBeLessThanZero '${count}'`);
+        }
+
+        if (start + count > Number.MAX_VALUE) {
+            throw new Error(`OutOfRange '${start} + ${count}'`);
+        }
+
+        for (let num = start; num <= start + count - 1; num++) {
+            yield num;
+        }
+    }
+
+    /**
      * Projects each element of a sequence into a new form, optionally incorporating the element's index.
      * @param transformFunc A transform function to apply to each source element; the second parameter of the function represents the index of the source element.
      * @returns A LinqArray<TResultItem> whose elements are the result of invoking the transform function on each element of the LinqArray instance.
