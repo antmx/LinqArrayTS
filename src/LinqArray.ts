@@ -922,7 +922,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
     /**
      * Sorts the elements of a sequence in ascending order, using an optional custom comparer function.
      * @param comparerFunc An optional equality comparer to compare values.
-     * @returns A `LinqArray<TItem>` whose elements are sorted.
+     * @returns A `LinqArray<TItem>` whose elements are sorted in ascending order.
      */
     order(
         comparerFunc?: (first: TItem, second: TItem) => number
@@ -1013,6 +1013,20 @@ export default class LinqArray<TItem> extends Array<TItem> {
     ): LinqArray<TItem> {
 
         let results = this.orderBy(keySelectorFunc, comparerFunc).reverse2();
+
+        return results;
+    }
+
+    /**
+     * Sorts the elements of a sequence in descending order, optionally using a custom comparer function.
+     * @param comparerFunc An optional equality comparer to compare values.
+     * @returns A `LinqArray<TItem>` whose elements are sorted in descending order.
+     */
+    orderDescending(
+        comparerFunc?: (first: TItem, second: TItem) => number
+    ): LinqArray<TItem> {
+
+        let results = this.order(comparerFunc).reverse2();
 
         return results;
     }

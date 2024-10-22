@@ -57,7 +57,7 @@ LinqArray includes equivalents of these common .NET LINQ, Generic and Array meth
 - [order](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.order)
 - [orderBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderBy)
 - [orderByDescending](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderByDescending)
-- [orderDescending](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderDescending) TODO
+- [orderDescending](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderDescending)
 - [prepend](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.prepend) TODO
 - [range](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.range) TODO
 - [repeat](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.repeat) TODO
