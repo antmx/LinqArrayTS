@@ -1032,6 +1032,22 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
+     * Prepends a value to the start of the sequence.
+     * @param element The value to prepend to the sequence.
+     * @returns A new sequence that starts with `element`.
+     */
+    prepend(
+        element: TItem
+    ): LinqArray<TItem> {
+
+        let items = this.clone();
+
+        items.unshift(element);
+
+        return items;
+    }
+
+    /**
      * Creates a new `LinqArray<TItem>` containing the items of the source array in reverse order.
      */
     reverse2(): LinqArray<TItem> {
