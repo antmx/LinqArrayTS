@@ -1084,6 +1084,24 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
+     * Generates a sequence that contains a value repeated a specified number of times.
+     * @param element The value to be repeated.
+     * @param count The number of times to repeat the value in the generated sequence.
+     * @template TResult The type of the element to be repeated in the result sequence.
+     * @returns An `IterableIterator<TResult>` that contains a repeated value.
+     */
+    static *repeat<TResult>(
+        element: TResult,
+        count: number
+    ): IterableIterator<TResult> {
+
+        for (let idx = 0; idx < count; idx++) {
+            let copy = { ...element }; // Use spread to create a copy
+            yield copy;
+        }
+    }
+
+    /**
      * Projects each element of a sequence into a new form, optionally incorporating the element's index.
      * @param transformFunc A transform function to apply to each source element; the second parameter of the function represents the index of the source element.
      * @returns A LinqArray<TResultItem> whose elements are the result of invoking the transform function on each element of the LinqArray instance.
