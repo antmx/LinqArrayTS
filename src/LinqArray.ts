@@ -863,7 +863,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
-     * Returns the minimum value in a generic sequence.
+     * Returns the minimum value in a sequence.
      * @param comparerFunc An optional comparer function to compare values.
      * @returns The minimum value in the sequence.
      */
@@ -1067,8 +1067,7 @@ export default class LinqArray<TItem> extends Array<TItem> {
     static *range(
         start: number,
         count: number
-    )
-        : IterableIterator<number> {
+    ): IterableIterator<number> {
 
         if (count < 0) {
             throw new Error(`CannotBeLessThanZero '${count}'`);
@@ -1154,6 +1153,42 @@ export default class LinqArray<TItem> extends Array<TItem> {
         });
 
         return results;
+    }
+
+    /**
+     * Determines whether two sequences are equal by comparing their elements, using an optional specified equality comparer function.
+     * @param second A `LinqArray<TItem>` to compare to the first sequence.
+     * @param comparerFunc An optional equality comparer function to use to compare elements.
+     * @returns `true` if the two source sequences are of equal length and their corresponding elements compare equal according to either default or optional custom comparer; otherwise, `false`.
+     */
+    sequenceEqual(
+        second: LinqArray<TItem>,
+        comparerFunc?: (first: TItem, second: TItem) => boolean
+    ): boolean {
+
+        if (second == undefined) {
+            throw new Error(`ArgumentNull 'second'`);
+        }
+
+        if (this.length != second.length) {
+            return false;
+        }
+
+        if (comparerFunc === undefined) {
+            comparerFunc = (first: TItem, second: TItem) => first == second;
+        }
+
+        let result = true;
+
+        this.forEach((valueOfElement, indexInArray) => {
+
+            if (!comparerFunc(valueOfElement, second[indexInArray])) {
+                result = false;
+                return false; // Exit forEach
+            }
+        });
+
+        return result
     }
 
     /**

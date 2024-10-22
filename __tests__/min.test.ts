@@ -30,7 +30,7 @@ describe('min', () => {
 
         let items = new LinqArray(users); // items is of type LinqArray<{ name: string, age: number }>
 
-        let result = items.max(
+        let result = items.min(
             (first, second) => first.age < second.age);
 
         let expected = { "name": "Rod", "age": 20 };
