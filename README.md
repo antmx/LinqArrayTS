@@ -73,7 +73,7 @@ LinqArray includes equivalents of these common .NET LINQ, Generic and Array meth
 - [skipWhile](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skipWhile)
 - [sum](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.sum)
 - [take](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.take)
-- [takeLast](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.takeLast) TODO
+- [takeLast](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.takeLast)
 - [takeWhile](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.takeWhile)
 - [thenBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.thenBy) TODO
 - [thenByDescending](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.thenByDescending) TODO

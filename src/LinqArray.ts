@@ -1444,6 +1444,27 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
+     * Returns a new `LinqArray<TItem>` that contains the last `count` elements from source.
+     * @param count The number of elements to take from the end of the collection.
+     * @returns A new enumerable collection that contains the last `count` elements from source.
+     */
+    takeLast(
+        count: number
+    ): LinqArray<TItem> {
+
+        let results = new LinqArray<TItem>();
+
+        this.forEach((valueOfElement, indexInArray) => {
+
+            if (indexInArray >= this.length - count) {
+                results.push(valueOfElement);
+            }
+        });
+
+        return results;
+    }
+
+    /**
      * Returns elements from a sequence as long as a specified condition is true. The element's index can be used in the logic of the predicate function.
      * @param predicateFunc A function to test each source element for a condition; the second parameter of the function represents the index of the source element.
      * @returns An new LinqArray<TItem> that contains elements from the input sequence that occur before the element at which the test no longer passes.
