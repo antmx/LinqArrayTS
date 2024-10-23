@@ -354,7 +354,6 @@ export default class LinqArray<TItem> extends Array<TItem> {
 
         let self = this;
         let results = new LinqArray<TItem>();
-        //let key: TKey;
 
         if (comparerFunc == undefined) {
             comparerFunc = (first: TKey, second: TKey) => first == second;
@@ -364,8 +363,6 @@ export default class LinqArray<TItem> extends Array<TItem> {
             comparerFunc(keySelectorFunc(first), keySelectorFunc(second));
 
         self.forEach((valueOfElement, indexInArray) => {
-
-            //key = keySelectorFunc(valueOfElement);
 
             if (!results.contains(valueOfElement, keyComparerFunc)) {
                 results.push(valueOfElement);
@@ -674,11 +671,6 @@ export default class LinqArray<TItem> extends Array<TItem> {
         keySelectorFunc: (itm: TItem) => TKey,
         keyComparerFunc?: (first: TKey, second: TKey) => boolean
     ): LinqArray<TItem> {
-
-        // var valuetoupdate = mappeddata.IntersectBy(
-        //      users.Select(y => y.UserId),        // secondItems
-        //      y => y.UserId,                      // keySelectorFunc
-        //      StringComparer.OrdinalIgnoreCase);  // keyComparerFunc
 
         let results = new LinqArray<TItem>();
 
@@ -1319,6 +1311,31 @@ export default class LinqArray<TItem> extends Array<TItem> {
         this.forEach((valueOfElement, indexInArray) => {
 
             if (indexInArray + 1 > count) {
+                results.push(valueOfElement);
+            }
+        });
+
+        return results;
+    }
+
+    /**
+     * Returns a new `LinqArray<TItem>` that contains the elements from source with the last `count` elements of the source collection omitted.
+     * @param count The number of elements to omit from the end of the collection.
+     * @returns A new enumerable collection that contains the elements from source minus `count` elements from the end of the collection.
+     */
+    skipLast(
+        count: number
+    ): LinqArray<TItem> {
+
+        let results = new LinqArray<TItem>();
+
+        if (count <= 0) {
+            return results;
+        }
+
+        this.forEach((valueOfElement, indexInArray) => {
+
+            if (indexInArray < this.length - count) {
                 results.push(valueOfElement);
             }
         });
