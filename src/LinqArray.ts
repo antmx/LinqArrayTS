@@ -637,6 +637,30 @@ export default class LinqArray<TItem> extends Array<TItem> {
     }
 
     /**
+     * Returns the index of the first occurrence of a value in an array based on a finder function, or -1 if it is not present.
+     * @param valueToFind The value whose index is sought.
+     * @param finderFunc An comparer function to compare element values against @param valueToFind.
+     * @returns A number indicating the zero-based index of the sought element, or -1 if not found.
+     */
+    indexOf2<TKey>(
+        valueToFind: TKey,
+        finderFunc: (valueOfElement: TItem, valueToFind: TKey) => boolean
+    ): number {
+
+        let index = -1;
+
+        this.forEach((valueOfElement, indexInArray) => {
+
+            if (finderFunc(valueOfElement, valueToFind)) {
+                index = indexInArray;
+                return false; // Exit forEach
+            }
+        })
+
+        return index;
+    }
+
+    /**
      * Produces the set intersection of two sequences, using an optional equality comparer method to compare values.
      * @param secondItems A LinqArray<TItem> whose distinct elements that also appear in the first sequence will be returned.
      * @param comparerFunc? An optional equality comparer function to compare values.
@@ -1485,6 +1509,50 @@ export default class LinqArray<TItem> extends Array<TItem> {
                 break;
             }
         }
+
+        return results;
+    }
+
+    /**
+     * Creates a `Dictionary<TKey, TValue>` according to a specified key selector function, a comparer, and an element selector function.
+     * @param keySelectorFunc A function to extract a key from each element.
+     * @param elementSelectorFunc A transform function to produce a result element value from each element.
+     * @param keyComparerFunc An equality comparer function to compare keys.
+     * @returns A `Dictionary<TKey, TValue>` that contains values of type `TElement` selected from the source sequence.
+     */
+    toDictionary<TKey, TElement>(
+        keySelectorFunc: (item: TItem) => TKey,
+        elementSelectorFunc: (item: TItem) => TElement,
+        keyComparerFunc?: (first: TKey, second: TKey) => boolean
+    ) {
+
+        let results = new LinqArray<{
+            key: TKey,
+            values: TElement[]
+        }>();
+
+        if (keyComparerFunc == undefined) {
+            keyComparerFunc = (a: TKey, b: TKey) => a == b;
+        }
+
+        this.forEach((valueOfElement, indexInArray) => {
+
+            let currKey = keySelectorFunc(valueOfElement);
+
+            let existingIdx = results.indexOf2(
+                currKey,
+                r => keyComparerFunc(r.key, currKey));
+
+            if (existingIdx > -1) {
+                results[existingIdx].values.push(elementSelectorFunc(valueOfElement));
+            }
+            else {
+                results.push({
+                    key: currKey,
+                    values: [elementSelectorFunc(valueOfElement)]
+                });
+            }
+        });
 
         return results;
     }

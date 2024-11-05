@@ -45,6 +45,7 @@ LinqArray includes equivalents of these common .NET LINQ, Generic and Array meth
 - [firstOrDefault](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.firstOrDefault)
 - [groupBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.groupBy)
 - [groupJoin](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.groupJoin)
+- [indexOf2] (new)
 - [intersect](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.intersect)
 - [intersectBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.intersectBy)
 - [join](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.join) (implemented as join2)
@@ -78,7 +79,7 @@ LinqArray includes equivalents of these common .NET LINQ, Generic and Array meth
 - [thenBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.thenBy) TODO
 - [thenByDescending](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.thenByDescending) TODO
 - [toArray](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.toArray) TODO
-- [toDictionary](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.toDictionary) TODO
+- [toDictionary](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.toDictionary)
 - [union](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.union)
 - [where](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.where)
 - [zip](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.zip)
