@@ -8,7 +8,7 @@ TypeScript code example
 import LinqArray from "../src/LinqArray";
 
 let jsItems = [2, 4, 6, 8, 1, 3, 5, 7]; // Standard JS array of numbers
-let items1 = new LinqArray<number>(jsItems); // items is of type LinqArray<number>, constructed from the standard JS array of numbers
+let items1 = new LinqArray<number>(jsItems); // items1 is of type LinqArray<number>, constructed from the standard JS array of numbers
 let items2 = new LinqArray(jsItems); // Simplified constructor where generic type (number) is inferred from the source array
 
 let firstOver4Times10 = items2
@@ -45,7 +45,7 @@ LinqArray includes equivalents of these common .NET LINQ, Generic and Array meth
 - [firstOrDefault](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.firstOrDefault)
 - [groupBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.groupBy)
 - [groupJoin](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.groupJoin)
-- [indexOf2] (new)
+- indexOf2 (new)
 - [intersect](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.intersect)
 - [intersectBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.intersectBy)
 - [join](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.join) (implemented as join2)
@@ -76,9 +76,9 @@ LinqArray includes equivalents of these common .NET LINQ, Generic and Array meth
 - [take](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.take)
 - [takeLast](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.takeLast)
 - [takeWhile](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.takeWhile)
-- [thenBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.thenBy) TODO
-- [thenByDescending](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.thenByDescending) TODO
-- [toArray](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.toArray) TODO
+- [thenBy](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.thenBy) (to be implemented as part of Enumerable.ts)
+- [thenByDescending](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.thenByDescending) (to be implemented as part of Enumerable.ts)
+- [toArray](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.toArray) (to be implemented as part of Enumerable.ts)
 - [toDictionary](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.toDictionary)
 - [union](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.union)
 - [where](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.where)
