@@ -1,7 +1,7 @@
 {
   "name": "linqarrayts",
   "version": "1.0.0",
-  "description": "",
+  "description": "A TypeScript generic array that supports .NET Language Integrated Query (LINQ) operations",
   "main": "index.js",
   "dependencies": {
     "acorn": "^8.12.1",
