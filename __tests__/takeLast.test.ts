@@ -32,7 +32,6 @@ describe('takeLast', () => {
     test("Returns last item when count == 1", () => {
 
         let items = new LinqArray(_items);
-        debugger;
         let result = items.takeLast(1);
         let expected = ["Pop"];
 
@@ -42,7 +41,6 @@ describe('takeLast', () => {
     test("Returns correct last items when count < length>", () => {
 
         let items = new LinqArray(_items);
-        debugger;
         let result = items.takeLast(5);
         let expected = ["Bar", "Baz", "Qux", "Fiz", "Pop"];
 
@@ -52,7 +50,6 @@ describe('takeLast', () => {
     test("Returns all items when count equals length", () => {
 
         let items = new LinqArray(_items);
-        debugger;
         let result = items.takeLast(6);
         let expected = ["Foo", "Bar", "Baz", "Qux", "Fiz", "Pop"];
 
